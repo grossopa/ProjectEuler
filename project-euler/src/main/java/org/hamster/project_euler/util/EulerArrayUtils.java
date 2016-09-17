@@ -58,13 +58,15 @@ public class EulerArrayUtils {
 
         T actual = values.iterator().next();
 
-        List<T> subSet = new LinkedList<>(values);
+        List<T> subSet = new LinkedList<>();
+        subSet.addAll(values);
         subSet.remove(actual);
 
         List<List<T>> subSetCombination = combination(subSet, size - 1);
 
         for (List<T> set : subSetCombination) {
-            List<T> newSet = new LinkedList<>(set);
+            List<T> newSet = new LinkedList<>();
+            newSet.addAll(set);
             newSet.add(0, actual);
             combination.add(newSet);
         }
