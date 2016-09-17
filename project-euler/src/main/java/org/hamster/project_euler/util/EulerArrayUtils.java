@@ -14,6 +14,7 @@ import java.util.List;
  * @since 1.0
  */
 public class EulerArrayUtils {
+    
     /**
      * get n! permutation of the elements of array a (not in order)
      * 
@@ -25,7 +26,7 @@ public class EulerArrayUtils {
         permutation(Arrays.copyOf(s, l), l, r);
         return r;
     }
-
+    
     private static void permutation(long[] a, int n, List<long[]> r) {
         if (n == 1) {
             r.add(Arrays.copyOf(a, a.length));
