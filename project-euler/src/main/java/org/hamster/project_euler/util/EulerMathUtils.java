@@ -152,5 +152,22 @@ public class EulerMathUtils {
     public static boolean isPrime(double n) {
         return isPrime(BigDecimal.valueOf(n).toBigInteger());
     }
+    
+    /**
+     * A palindromic number reads the same both ways.
+     * 
+     * @param n
+     * @return
+     */
+    public static final boolean isPalindromic(long n) {
+        char[] s = String.valueOf(n).toCharArray();
+        int l = s.length;
+        for (int i = 0; i < l / 2; i++) {
+            if (s[i] != s[l - i - 1]) {
+                return false;
+            }
+        }
+        return true;
+    }
 
 }
