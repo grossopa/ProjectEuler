@@ -21,7 +21,7 @@ public class P008 implements Solution {
      */
     @Override
     public double solution() {
-        return 0;
+        return solutionTest(13);
     }
 
     /* 
@@ -33,14 +33,39 @@ public class P008 implements Solution {
     public double solutionTest(double adjacentLength) {
         List<String> lines = EulerFileUtils.readAsLines("src/main/java/org/hamster/project_euler/p001_025/P008_file.txt");
         
-        String numbers = "";
+        String numberStr = "";
         for (String l : lines) {
-            numbers += l;
+            numberStr += l;
+        }
+        char[] numbers = numberStr.toCharArray();
+        
+        double max = 0;
+        
+        boolean isSkip = false;
+        for (int i = 0; i < numbers.length - adjacentLength; i++) {
+            double val = 1;
+            for (int j = (int) (i + adjacentLength - 1); j >= i; j--) {
+                int num = Integer.valueOf(String.valueOf(numbers[j]));
+                if (num == 0) {
+                    isSkip = true;
+                    i = j + 1;
+                    break;
+                } else {
+                    val *= num;
+                }
+            }
+            
+            if (isSkip) {
+                isSkip = false;
+                continue;
+            }
+            
+            if (val > max) {
+                max = val;
+            }
         }
         
-        
-        
-        return 0;
+        return max;
     }
 
 }

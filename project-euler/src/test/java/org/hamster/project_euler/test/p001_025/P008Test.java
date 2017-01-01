@@ -19,7 +19,7 @@ public class P008Test extends AbstractSolutionTest<P008> {
      */
     @Override
     public void testExample() {
-
+        invokeTest(5832, 4);
     }
 
     /*
@@ -29,7 +29,7 @@ public class P008Test extends AbstractSolutionTest<P008> {
      */
     @Override
     public void testSolution() {
-
+        invoke(23514624000D);
     }
 
     /*

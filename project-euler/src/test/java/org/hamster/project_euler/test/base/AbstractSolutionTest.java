@@ -10,6 +10,7 @@ import java.math.BigDecimal;
 import org.hamster.project_euler.base.Solution;
 import org.hamster.project_euler.base.SolutionString;
 import org.junit.Assert;
+import org.junit.Test;
 
 /**
  * @author <a href="mailto:grossopaforever@gmail.com">Jack Yin</a>
@@ -20,11 +21,13 @@ public abstract class AbstractSolutionTest<P extends Solution> {
     /**
      * test the give example
      */
+    @Test
     public abstract void testExample();
 
     /**
      * text the answer
      */
+    @Test
     public abstract void testSolution();
     
     /**
