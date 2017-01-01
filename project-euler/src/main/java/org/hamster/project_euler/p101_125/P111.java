@@ -3,8 +3,6 @@
  */
 package org.hamster.project_euler.p101_125;
 
-import java.math.BigInteger;
-
 import org.hamster.project_euler.base.Solution;
 import org.hamster.project_euler.util.EulerMathUtils;
 
@@ -15,12 +13,12 @@ import org.hamster.project_euler.util.EulerMathUtils;
  */
 public class P111 implements Solution {
 
-    private int[] a = new int[] { 2, 3, 5, 7, 11 };
-
+    @Override
     public double solution() {
         return solutionTest(10);
     }
 
+    @Override
     public double solutionTest(double n) {
 
         int[] number = new int[(int) n];
@@ -47,7 +45,7 @@ public class P111 implements Solution {
         for (int i = 0; i < number.length; i++) {
             num = num * 10 + number[i];
         }
-        return EulerMathUtils.isProbablePrime(BigInteger.valueOf(num), a) ? num : 0;
+        return EulerMathUtils.isPrime(num) ? num : 0;
     }
 
     private long recurse(int[] number, int basedigit, int startpos, int level, boolean fill) {

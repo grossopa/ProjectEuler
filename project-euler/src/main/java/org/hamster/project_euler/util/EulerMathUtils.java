@@ -3,9 +3,7 @@
  */
 package org.hamster.project_euler.util;
 
-import static java.math.BigInteger.ONE;
-import static java.math.BigInteger.ZERO;
-
+import java.math.BigDecimal;
 import java.math.BigInteger;
 
 /**
@@ -14,10 +12,9 @@ import java.math.BigInteger;
  */
 public class EulerMathUtils {
 
-    public static final BigInteger TWO = BigInteger.valueOf(2);
-    public static final BigInteger FIVE = BigInteger.valueOf(5);
-    public static final BigInteger NINE = BigInteger.valueOf(9);
-    public static final BigInteger THREE = BigInteger.valueOf(3);
+    private EulerMathUtils() {
+        // do nothing
+    }
 
     public static double combinationCount(double m, double n) {
         if (2 * m > n) {
@@ -30,10 +27,10 @@ public class EulerMathUtils {
         }
         return result / EulerMathUtils.factorial(m);
     }
-    
+
     public static double permutationCount(double m, double n) {
         double result = 1;
-        for (double i = n; i <= n -m + 1; n++) {
+        for (double i = n; i <= n - m + 1; n++) {
             result *= i;
         }
         return result;
@@ -101,7 +98,7 @@ public class EulerMathUtils {
             throw new IllegalArgumentException("please use primes() instead.");
         }
         int bound = 100000000; // 10^9
-        int boundl = ((int) (n / bound));
+        int boundl = (int) (n / bound);
         boolean[][] composites = new boolean[boundl + 1][bound];
         int sqrt = (int) Math.sqrt(n);
         for (int m = 2; m <= sqrt; m++) {
@@ -116,70 +113,44 @@ public class EulerMathUtils {
         return composites;
     }
 
-    public static final int[] AR1 = new int[] { 2, 3 };
-    public static final int[] AR2 = new int[] { 31, 73 };
-    public static final int[] AR3 = new int[] { 2, 7, 61 };
-    public static final int[] AR4 = new int[] { 2, 3, 5, 7, 11 };
-    public static final int[] AR5 = new int[] { 2, 3, 5, 7, 11, 13 };
-    public static final int[] AR6 = new int[] { 2, 3, 5, 7, 11, 13, 17 };
-
     /**
-     * Returns a boolean to tell if the number is probable prime<br>
-     * It is an implementation of the Rabin-Miller test<br>
-     * In order to get a real prime the choice of ar should be made as<br>
-     * if n < 1,373,653, it is enough to test ar = {2, 3};<br>
-     * if n < 9,080,191, it is enough to test ar = {31, 73};<br>
-     * if n < 4,759,123,141, it is enough to test ar = {2, 7, 61};<br>
-     * if n < 2,152,302,898,747, it is enough to test ar = {2, 3, 5, 7, 11};<br>
-     * if n < 3,474,749,660,383, it is enough to test ar = {2, 3, 5, 7, 11, 13};<br>
-     * if n < 341,550,071,728,321, it is enough to test ar = {2, 3, 5, 7, 11, 13, 17}.<br>
+     * Uses default Miller每Rabin primality test
      * 
      * @param n
-     * @param ar
-     * @return
+     * @return true if the number is prime
      */
-    public static boolean isProbablePrime(BigInteger n, int[] ar) {
-        if (/* n <= 1 */ n.compareTo(ONE) <= 0)
-            return false;
-        if (/* n == 2 */ n.equals(TWO))
-            return true;
-        if (/* n % 2 == 0 */ n.remainder(TWO).equals(ZERO))
-            return false;
-        if (/* n < 9 */n.compareTo(NINE) < 0)
-            return true;
-        if (/* n % 3 == 0 */ n.remainder(THREE).equals(ZERO))
-            return false;
-        if (/* n % 5 == 0 */ n.remainder(FIVE).equals(ZERO))
-            return false;
-
-        for (int i = 0; i < ar.length; i++) {
-            if (witness(ar[i], n))
-                return false;
-        }
-        BigInteger.ONE.isProbablePrime(certainty)
-        return true;
+    public static boolean isPrime(int n) {
+        return isPrime(BigInteger.valueOf((int) n));
     }
 
-    private static boolean witness(int a, BigInteger n) {
-        int t = 0;
-        BigInteger u = n.subtract(ONE);
-        while (/* (u & 1) == 0 */ u.and(ONE).equals(ZERO)) {
-            t++;
-            u = u.shiftRight(1);
-        }
-
-        BigInteger xi1 = BigInteger.valueOf(a).modPow(u, n);
-        BigInteger xi2;
-
-        for (int i = 0; i < t; i++) {
-            xi2 = xi1.multiply(xi1).remainder(n);
-            if (xi2.equals(ONE) && !xi1.equals(ONE) && !xi1.equals(n.subtract(ONE))) {
-                return true;
-            }
-            xi1 = xi2;
-        }
-        if (!xi1.equals(ONE))
-            return true;
-        return false;
+    /**
+     * Uses default Miller每Rabin primality test
+     * 
+     * @param n
+     * @return true if the number is prime
+     */
+    public static boolean isPrime(long n) {
+        return isPrime(BigInteger.valueOf(n));
     }
+
+    /**
+     * Uses default Miller每Rabin primality test
+     * 
+     * @param n
+     * @return true if the number is prime
+     */
+    public static boolean isPrime(BigInteger n) {
+        return n.isProbablePrime(15);
+    }
+
+    /**
+     * Uses default Miller每Rabin primality test
+     * 
+     * @param n
+     * @return true if the number is prime
+     */
+    public static boolean isPrime(double n) {
+        return isPrime(BigDecimal.valueOf(n).toBigInteger());
+    }
+
 }

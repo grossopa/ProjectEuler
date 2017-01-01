@@ -4,6 +4,7 @@
 package org.hamster.project_euler.p001_025;
 
 import org.hamster.project_euler.base.Solution;
+import org.hamster.project_euler.util.EulerMathUtils;
 
 /**
  * @author <a href="mailto:grossopaforever@gmail.com">Jack Yin</a>
@@ -18,7 +19,7 @@ public class P003 implements Solution {
      */
     @Override
     public double solution() {
-        return 0;
+        return solutionTest(600_851_475_143D);
     }
 
     /*
@@ -28,7 +29,20 @@ public class P003 implements Solution {
      */
     @Override
     public double solutionTest(double input) {
-        return 0;
+        int max = (int) Math.sqrt(input);
+        
+        if ((max & 1) != 0) {
+            // is even
+            max--;
+        }
+        
+        for (int i = max; i >= 2; i--) {
+            if (EulerMathUtils.isPrime(i) && input % i == 0) {
+                return i;
+            }
+        }
+        
+        return -1;
     }
 
 }
