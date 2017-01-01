@@ -42,6 +42,29 @@ public class EulerFileUtils {
             }
         }
         return null;
-
+    }
+    
+    public static final List<String> readAsLines(String path) {
+        BufferedReader bf = null;
+        try {
+            bf = new BufferedReader(new FileReader(path));
+            String line = null;
+            List<String> result = new LinkedList<>();
+            while ((line = bf.readLine()) != null) {
+                result.add(line);
+            }
+            return result;
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (bf != null) {
+                try {
+                    bf.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return null;
     }
 }
