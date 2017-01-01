@@ -5,6 +5,8 @@ package org.hamster.project_euler.util;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author <a href="mailto:grossopaforever@gmail.com">Jack Yin</a>
@@ -168,6 +170,49 @@ public class EulerMathUtils {
             }
         }
         return true;
+    }
+    
+    /**
+     * Finds all prime factors (with count of each)
+     * 
+     * @param n
+     * @return primes / count
+     */
+    public static final Map<Double, Long> primeFactorization(long n) {
+        return primeFactorization((double) n);
+    }
+    
+    /**
+     * Finds all prime factors (with count of each)
+     * 
+     * @param n
+     * @return primes / count
+     */
+    public static final Map<Double, Long> primeFactorization(double n) {
+        Map<Double, Long> result = new HashMap<>();
+        if (EulerMathUtils.isPrime(n)) {
+            result.put(n, 1L);
+        }
+        
+        double max = Math.sqrt(n);
+        double num = n;
+        for (double i = 2; i <= max; i++) {
+            if (!EulerMathUtils.isPrime(i)) {
+                continue;
+            }
+            while ((int) (num % i) == 0) {
+                if (!result.containsKey(i)) {
+                    result.put(i, 1L);
+                } else {
+                    result.put(i, result.get(i) + 1);
+                }
+                num /= i;
+            }
+        }
+        if (num > 1) {
+            result.put(num, 1L);
+        }
+        return result;
     }
 
 }

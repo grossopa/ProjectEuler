@@ -5,6 +5,7 @@ package org.hamster.project_euler.test.base;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.math.BigDecimal;
 
 import org.hamster.project_euler.base.Solution;
 import org.hamster.project_euler.base.SolutionString;
@@ -41,7 +42,7 @@ public abstract class AbstractSolutionTest<P extends Solution> {
         try {
             // long t = System.currentTimeMillis();
             double r = problemClass().newInstance().solution();
-            // System.out.println("Result : " + r + " Time: " + (System.currentTimeMillis() - t) + " ms");
+            System.out.println(problemClass().getSimpleName() + " answer is : " + BigDecimal.valueOf(r).toPlainString());
             Assert.assertEquals(expectedResult, r, 0.0001D);
         } catch (InstantiationException | IllegalAccessException e) {
             e.printStackTrace();
