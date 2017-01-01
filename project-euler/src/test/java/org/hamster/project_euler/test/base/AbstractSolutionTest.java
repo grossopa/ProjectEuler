@@ -39,9 +39,9 @@ public abstract class AbstractSolutionTest<P extends Solution> {
      */
     public final void invoke(double expectedResult) {
         try {
-            long t = System.currentTimeMillis();
+            // long t = System.currentTimeMillis();
             double r = problemClass().newInstance().solution();
-            System.out.println("Result : " + r + " Time: " + (System.currentTimeMillis() - t) + " ms");
+            // System.out.println("Result : " + r + " Time: " + (System.currentTimeMillis() - t) + " ms");
             Assert.assertEquals(expectedResult, r, 0.0001D);
         } catch (InstantiationException | IllegalAccessException e) {
             e.printStackTrace();
@@ -56,7 +56,7 @@ public abstract class AbstractSolutionTest<P extends Solution> {
      */
     public final void invokeTest(double expectedResult, Object... args) {
         try {
-            long t = System.currentTimeMillis();
+            // long t = System.currentTimeMillis();
             Method solutionTestMethod = null;
             for (Method ms : problemClass().getMethods()) {
                 if (ms.getName() == "solutionTest") {
@@ -64,7 +64,7 @@ public abstract class AbstractSolutionTest<P extends Solution> {
                 }
             }
             double r = (double) solutionTestMethod.invoke(problemClass().newInstance(), args);
-            System.out.println("Test result : " + r + " Time: " + (System.currentTimeMillis() - t) + " ms");
+            // System.out.println("Test result : " + r + " Time: " + (System.currentTimeMillis() - t) + " ms");
             Assert.assertEquals(expectedResult, r, 0.0001D);
         } catch (InstantiationException | IllegalAccessException | SecurityException | IllegalArgumentException | InvocationTargetException e) {
             e.printStackTrace();
@@ -73,9 +73,9 @@ public abstract class AbstractSolutionTest<P extends Solution> {
 
     public static final <T extends SolutionString> void invoke(Class<T> clazz, String expectedResult) {
         try {
-            long t = System.currentTimeMillis();
+            // long t = System.currentTimeMillis();
             String r = clazz.newInstance().solution();
-            System.out.println("Result : " + r + " Time: " + (System.currentTimeMillis() - t) + " ms");
+            // System.out.println("Result : " + r + " Time: " + (System.currentTimeMillis() - t) + " ms");
             Assert.assertEquals(expectedResult, r);
         } catch (InstantiationException | IllegalAccessException e) {
             e.printStackTrace();

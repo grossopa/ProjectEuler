@@ -156,6 +156,7 @@ public class EulerMathUtils {
             if (witness(ar[i], n))
                 return false;
         }
+        BigInteger.ONE.isProbablePrime(certainty)
         return true;
     }
 
