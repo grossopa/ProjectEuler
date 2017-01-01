@@ -19,15 +19,35 @@ public class EulerMathUtils {
     public static final BigInteger NINE = BigInteger.valueOf(9);
     public static final BigInteger THREE = BigInteger.valueOf(3);
 
+    public static double combinationCount(double m, double n) {
+        if (2 * m > n) {
+            m = n - m;
+        }
+
+        double result = 1;
+        for (double i = 0; n - i >= n - m + 1; i++) {
+            result *= n - i;
+        }
+        return result / EulerMathUtils.factorial(m);
+    }
+    
+    public static double permutationCount(double m, double n) {
+        double result = 1;
+        for (double i = n; i <= n -m + 1; n++) {
+            result *= i;
+        }
+        return result;
+    }
+
     /**
      * return n!
      * 
      * @param n
      * @return
      */
-    public static final long factorial(long n) {
-        long r = 1;
-        for (int i = 1; i <= n; i++) {
+    public static final double factorial(double n) {
+        double r = 1;
+        for (double i = 1; i <= n; i++) {
             r *= i;
         }
         return r;

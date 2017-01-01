@@ -8,5 +8,18 @@ package org.hamster.project_euler.base;
  * @since 1.0
  */
 public interface Solution {
-    long solution();
+
+    /**
+     * 
+     * @return result
+     */
+    double solution();
+
+    /**
+     * solution test with double input
+     * 
+     * @param input
+     * @return
+     */
+    double solutionTest(double input);
 }

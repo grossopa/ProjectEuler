@@ -8,7 +8,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.hamster.project_euler.base.Solution;
-import org.hamster.project_euler.base.SolutionUtils;
 import org.hamster.project_euler.util.EulerArrayUtils;
 
 /**
@@ -20,7 +19,7 @@ import org.hamster.project_euler.util.EulerArrayUtils;
 public class P103 implements Solution {
 
     /**
-     * S(B) ¡Ù S(C); that is, sums of subsets cannot be equal.<br>
+     * S(B) ï¿½ï¿½ S(C); that is, sums of subsets cannot be equal.<br>
      * If B contains more elements than C then S(B) > S(C).
      * 
      * @param list
@@ -179,7 +178,7 @@ public class P103 implements Solution {
         }
     }
 
-    public static long[] findNextOptimumSet(long[] previous) {
+    private static long[] findNextOptimumSet(long[] previous) {
         long middle = previous[previous.length >> 1];
         long[] result = new long[previous.length + 1];
         result[0] = middle;
@@ -190,7 +189,7 @@ public class P103 implements Solution {
     }
 
     @Override
-    public long solution() {
+    public double solution() {
 //        System.out.println(isSpecialSum(new long[] { 81, 82, 99, 85 }));
 //        System.out.println(isSpecialSum(new long[] { 81, 88, 75, 42, 87, 84, 86, 65 }));
 //        System.out.println(isSpecialSum(new long[] { 157, 150, 164, 119, 79, 159, 161, 139, 158 }));
@@ -207,12 +206,12 @@ public class P103 implements Solution {
         return finalResult;
     }
 
-    /**
-     * @param args
+    /* (non-Javadoc)
+     * @see org.hamster.project_euler.base.Solution#solutionTest(double)
      */
-    public static void main(String[] args) {
-
-        SolutionUtils.invoke(P103.class, 20313839404245L);
+    @Override
+    public double solutionTest(double input) {
+        return 0;
     }
 
 }

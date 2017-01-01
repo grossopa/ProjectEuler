@@ -4,7 +4,6 @@
 package org.hamster.project_euler.p126_150;
 
 import org.hamster.project_euler.base.Solution;
-import org.hamster.project_euler.base.SolutionUtils;
 
 /**
  * FINISHED
@@ -13,14 +12,14 @@ import org.hamster.project_euler.base.SolutionUtils;
  * @since 1.0
  */
 public class P136 implements Solution {
-    
+
     private int[] record;
 
     @Override
-    public long solution() {
+    public double solution() {
         int bound = 50000000 + 1;
         record = new int[bound];
-        
+
         // i is 3a - z
         // j is a + z
         for (int i = 1; i < bound; i++) {
@@ -33,22 +32,25 @@ public class P136 implements Solution {
                 }
             }
         }
-        
+
         long result = 0;
         for (int i = 0; i < record.length; i++) {
             if (record[i] == 1) {
                 result++;
             }
         }
-        
+
         return result;
     }
 
-    /**
-     * @param args
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.hamster.project_euler.base.Solution#solutionTest(double)
      */
-    public static void main(String[] args) {
-        SolutionUtils.invoke(P136.class, 2544559L);
+    @Override
+    public double solutionTest(double input) {
+        return 0;
     }
 
 }

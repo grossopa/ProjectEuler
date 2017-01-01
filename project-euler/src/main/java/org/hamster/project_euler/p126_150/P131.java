@@ -6,7 +6,6 @@ package org.hamster.project_euler.p126_150;
 import java.math.BigInteger;
 
 import org.hamster.project_euler.base.Solution;
-import org.hamster.project_euler.base.SolutionUtils;
 
 /**
  * FINISHED 
@@ -16,7 +15,7 @@ import org.hamster.project_euler.base.SolutionUtils;
  */
 public class P131 implements Solution {
 
-    public long solutionTest(long max) {
+    public double solutionTest(double max) {
         int result = 0;
         for (int x = 1; x < max; x++) {
             long p = (long) (3 * Math.pow(x, 2) + 3 * x + 1);
@@ -33,16 +32,7 @@ public class P131 implements Solution {
     }
 
     @Override
-    public long solution() {
+    public double solution() {
         return solutionTest(1000000L);
     }
-
-    /**
-     * @param args
-     */
-    public static void main(String[] args) {
-        SolutionUtils.invokeSolutionTest(P131.class, 4L, 100L);
-        SolutionUtils.invoke(P131.class, 173L);
-    }
-
 }

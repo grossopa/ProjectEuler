@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.hamster.project_euler.base.Solution;
-import org.hamster.project_euler.base.SolutionUtils;
 import org.hamster.project_euler.util.EulerArrayUtils;
 
 /**
@@ -18,7 +17,7 @@ import org.hamster.project_euler.util.EulerArrayUtils;
 public class P118 implements Solution {
 
     @Override
-    public long solution() {
+    public double solution() {
         List<Long> arr = new ArrayList<>();
         arr.add(1L);
         arr.add(2L);
@@ -40,7 +39,7 @@ public class P118 implements Solution {
      */
     public long pick(List<Long> left, int last, int lastCount) {
         long result = 0;
-        
+
         if (left.isEmpty()) {
             return 1;
         }
@@ -54,7 +53,7 @@ public class P118 implements Solution {
                     if (num < last || !isPrime(num)) {
                         continue;
                     }
-                    
+
                     List<Long> next = new ArrayList<>();
                     next.addAll(left);
                     next.removeAll(comb);
@@ -73,7 +72,7 @@ public class P118 implements Solution {
         }
         return r;
     }
-    
+
     public long toNumber(long[] numbers) {
         long result = 0;
         for (int i = 0; i < numbers.length; i++) {
@@ -99,14 +98,15 @@ public class P118 implements Solution {
     private boolean isPrime(long n) {
         return BigInteger.valueOf(n).isProbablePrime(10);
         // this is not correct????
-        //return EulerMathUtils.isProbablePrime(BigInteger.valueOf(n), EulerMathUtils.AR6);
+        // return EulerMathUtils.isProbablePrime(BigInteger.valueOf(n), EulerMathUtils.AR6);
     }
 
-    /**
-     * @param args
+    /* (non-Javadoc)
+     * @see org.hamster.project_euler.base.Solution#solutionTest(double)
      */
-    public static void main(String[] args) {
-        SolutionUtils.invoke(P118.class, 44680L);
+    @Override
+    public double solutionTest(double input) {
+        return 0;
     }
 
 }
