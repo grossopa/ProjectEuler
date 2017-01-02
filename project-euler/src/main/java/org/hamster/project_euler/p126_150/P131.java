@@ -8,14 +8,20 @@ import java.math.BigInteger;
 import org.hamster.project_euler.base.Solution;
 
 /**
- * FINISHED 
+ * FINISHED
  * 
  * @author <a href="mailto:grossopaforever@gmail.com">Jack Yin</a>
  * @since 1.0
  */
 public class P131 implements Solution {
 
-    public double solutionTest(double max) {
+    /*
+     * 
+     * (non-Javadoc)
+     *
+     * @see org.hamster.project_euler.base.Solution#solution(double)
+     */
+    public Number solution(double max) {
         int result = 0;
         for (int x = 1; x < max; x++) {
             long p = (long) (3 * Math.pow(x, 2) + 3 * x + 1);
@@ -29,10 +35,5 @@ public class P131 implements Solution {
         }
 
         return result;
-    }
-
-    @Override
-    public double solution() {
-        return solutionTest(1000000L);
     }
 }

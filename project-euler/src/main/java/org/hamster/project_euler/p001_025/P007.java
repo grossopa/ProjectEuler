@@ -15,20 +15,10 @@ public class P007 implements Solution {
     /*
      * (non-Javadoc)
      *
-     * @see org.hamster.project_euler.base.Solution#solution()
-     */
-    @Override
-    public double solution() {
-        return solutionTest(10001);
-    }
-
-    /*
-     * (non-Javadoc)
-     *
      * @see org.hamster.project_euler.base.Solution#solutionTest(double)
      */
     @Override
-    public double solutionTest(double input) {
+    public Number solution(double input) {
         double count = input;
         double i = 1;
         while (count > 0) {
@@ -36,7 +26,7 @@ public class P007 implements Solution {
             if (EulerMathUtils.isPrime(i)) {
                 count--;
             }
-            
+
         }
         return i;
     }

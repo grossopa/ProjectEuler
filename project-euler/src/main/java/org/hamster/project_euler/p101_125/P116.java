@@ -17,20 +17,10 @@ public class P116 implements Solution {
     /*
      * (non-Javadoc)
      * 
-     * @see org.hamster.project_euler.base.Solution#solution()
-     */
-    @Override
-    public double solution() {
-        return solutionTest(50);
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
      * @see org.hamster.project_euler.base.Solution#solutionTest(double)
      */
     @Override
-    public double solutionTest(double blackCount) {
+    public Number solution(double blackCount) {
         return combination(2, blackCount) + combination(3, blackCount) + combination(4, blackCount);
     }
 

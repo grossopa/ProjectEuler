@@ -18,25 +18,15 @@ public class P005 implements Solution {
     /*
      * (non-Javadoc)
      *
-     * @see org.hamster.project_euler.base.Solution#solution()
-     */
-    @Override
-    public double solution() {
-        int [] nums = new int[20];
-        for (int i = 1; i <= 20; i++) {
-            nums[i - 1] = i;
-        }
-        return performSolution(nums);
-    }
-
-    /*
-     * (non-Javadoc)
-     *
      * @see org.hamster.project_euler.base.Solution#solutionTest(double)
      */
     @Override
-    public double solutionTest(double input) {
-        return performSolution(new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
+    public Number solution(double input) {
+        int[] nums = new int[(int) input];
+        for (int i = 1; i <= (int) input; i++) {
+            nums[i - 1] = i;
+        }
+        return performSolution(nums);
     }
 
     public double performSolution(int[] nums) {

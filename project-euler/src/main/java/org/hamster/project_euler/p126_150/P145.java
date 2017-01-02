@@ -43,18 +43,8 @@ public class P145 implements Solution {
     }
 
     @Override
-    public double solution() {
+    public Number solution(double input) {
         return doSolve(8);
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see org.hamster.project_euler.base.Solution#solutionTest(double)
-     */
-    @Override
-    public double solutionTest(double input) {
-        return 0;
     }
 
 }

@@ -3,12 +3,10 @@
  */
 package org.hamster.project_euler.test.base;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.math.BigDecimal;
+import java.math.BigInteger;
 
 import org.hamster.project_euler.base.Solution;
-import org.hamster.project_euler.base.SolutionString;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -19,70 +17,79 @@ import org.junit.Test;
 public abstract class AbstractSolutionTest<P extends Solution> {
 
     /**
-     * test the give example
+     * 
+     * @return the test case for example
      */
-    @Test
-    public abstract void testExample();
+    protected abstract TestResult example();
 
     /**
-     * text the answer
+     * 
+     * @return the test case for actual solution
      */
-    @Test
-    public abstract void testSolution();
-    
+    protected abstract TestResult solution();
+
     /**
      * 
      * @return the problem class
      */
-    public abstract Class<P> problemClass();
+    protected abstract Class<P> problemClass();
+
+    /**
+     * test the give example
+     * 
+     * @throws IllegalAccessException
+     * @throws InstantiationException
+     */
+    @Test
+    public void testExample() throws InstantiationException, IllegalAccessException {
+        TestResult example = example();
+        if (example == null) {
+            System.out.println(problemClass().getSimpleName() + " Skip example test");
+            return;
+        }
+        invoke(example.getInput(), example.getResult(), false);
+    }
+
+    /**
+     * text the answer
+     * 
+     * @throws IllegalAccessException
+     * @throws InstantiationException
+     */
+    @Test
+    public void testSolution() throws InstantiationException, IllegalAccessException {
+        TestResult solution = solution();
+        if (solution == null) {
+            System.out.println(problemClass().getSimpleName() + " Not resolved yet");
+            return;
+        }
+        invoke(solution.getInput(), solution.getResult(), true);
+    }
 
     /**
      * Invokes the <tt>solution</tt> method and verifies the result
      * 
      * @param expectedResult
+     * @throws IllegalAccessException
+     * @throws InstantiationException
      */
-    public final void invoke(double expectedResult) {
-        try {
-            // long t = System.currentTimeMillis();
-            double r = problemClass().newInstance().solution();
-            System.out.println(problemClass().getSimpleName() + " answer is : " + BigDecimal.valueOf(r).toPlainString());
-            Assert.assertEquals(expectedResult, r, 0.0001D);
-        } catch (InstantiationException | IllegalAccessException e) {
-            e.printStackTrace();
+    public final void invoke(double input, Number expectedResult, boolean showAnswer) throws InstantiationException, IllegalAccessException {
+        Number r = problemClass().newInstance().solution(input);
+        if (showAnswer) {
+            System.out.println(problemClass().getSimpleName() + " answer is : " + toBigDecimal(r).toPlainString());
         }
+        Assert.assertEquals(toBigDecimal(expectedResult), toBigDecimal(r));
     }
 
-    /**
-     * Invokes <tt>solutionTest</tt> method and verifies the result
-     * 
-     * @param expectedResult
-     * @param args
-     */
-    public final void invokeTest(double expectedResult, Object... args) {
-        try {
-            // long t = System.currentTimeMillis();
-            Method solutionTestMethod = null;
-            for (Method ms : problemClass().getMethods()) {
-                if (ms.getName() == "solutionTest") {
-                    solutionTestMethod = ms;
-                }
-            }
-            double r = (double) solutionTestMethod.invoke(problemClass().newInstance(), args);
-            // System.out.println("Test result : " + r + " Time: " + (System.currentTimeMillis() - t) + " ms");
-            Assert.assertEquals(expectedResult, r, 0.0001D);
-        } catch (InstantiationException | IllegalAccessException | SecurityException | IllegalArgumentException | InvocationTargetException e) {
-            e.printStackTrace();
+    protected static BigDecimal toBigDecimal(Number num) {
+        if (num instanceof BigDecimal) {
+            return (BigDecimal) num;
         }
-    }
 
-    public static final <T extends SolutionString> void invoke(Class<T> clazz, String expectedResult) {
-        try {
-            // long t = System.currentTimeMillis();
-            String r = clazz.newInstance().solution();
-            // System.out.println("Result : " + r + " Time: " + (System.currentTimeMillis() - t) + " ms");
-            Assert.assertEquals(expectedResult, r);
-        } catch (InstantiationException | IllegalAccessException e) {
-            e.printStackTrace();
+        if (num instanceof BigInteger) {
+            return new BigDecimal((BigInteger) num);
         }
+
+        return BigDecimal.valueOf(num.doubleValue());
     }
 }

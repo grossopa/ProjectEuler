@@ -14,20 +14,10 @@ public class P002 implements Solution {
     /*
      * (non-Javadoc)
      * 
-     * @see org.hamster.project_euler.base.Solution#solution()
-     */
-    @Override
-    public double solution() {
-        return solutionTest(4_000_000D);
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
      * @see org.hamster.project_euler.base.Solution#solutionTest(double)
      */
     @Override
-    public double solutionTest(double input) {
+    public Number solution(double input) {
         double result = 0;
         double prev1 = 0;
         double prev2 = 1;
@@ -40,7 +30,6 @@ public class P002 implements Solution {
                 isEven = 0;
                 result += number;
             }
-            System.out.println();
         }
         return result;
     }

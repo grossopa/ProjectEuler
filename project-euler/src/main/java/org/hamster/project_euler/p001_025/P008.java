@@ -17,20 +17,10 @@ public class P008 implements Solution {
     /* 
      * (non-Javadoc)
      *
-     * @see org.hamster.project_euler.base.Solution#solution()
-     */
-    @Override
-    public double solution() {
-        return solutionTest(13);
-    }
-
-    /* 
-     * (non-Javadoc)
-     *
      * @see org.hamster.project_euler.base.Solution#solutionTest(double)
      */
     @Override
-    public double solutionTest(double adjacentLength) {
+    public Number solution(double adjacentLength) {
         List<String> lines = EulerFileUtils.readAsLines("src/main/java/org/hamster/project_euler/p001_025/P008_file.txt");
         
         String numberStr = "";
@@ -45,7 +35,7 @@ public class P008 implements Solution {
         for (int i = 0; i < numbers.length - adjacentLength; i++) {
             double val = 1;
             for (int j = (int) (i + adjacentLength - 1); j >= i; j--) {
-                int num = Integer.valueOf(String.valueOf(numbers[j]));
+                int num = Integer.parseInt(String.valueOf(numbers[j]), 10);
                 if (num == 0) {
                     isSkip = true;
                     i = j + 1;

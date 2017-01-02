@@ -15,28 +15,18 @@ public class P004 implements Solution {
     /*
      * (non-Javadoc)
      *
-     * @see org.hamster.project_euler.base.Solution#solution()
-     */
-    @Override
-    public double solution() {
-        return solutionTest(3);
-    }
-
-    /*
-     * (non-Javadoc)
-     *
      * @see org.hamster.project_euler.base.Solution#solutionTest(double)
      */
     @Override
-    public double solutionTest(double input) {
+    public Number solution(double input) {
         int bound = (int) Math.pow(10, input) - 1;
         int low = (int) Math.pow(10, input - 1);
-        
+
         int maxResult = 0;
         for (int i = bound; i >= low; i--) {
             for (int j = bound; j >= low; j--) {
                 int cand = i * j;
-                
+
                 if (cand > maxResult && EulerMathUtils.isPalindromic(cand)) {
                     maxResult = cand;
                 }

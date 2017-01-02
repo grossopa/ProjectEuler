@@ -16,8 +16,8 @@ public class P136 implements Solution {
     private int[] record;
 
     @Override
-    public double solution() {
-        int bound = 50000000 + 1;
+    public Number solution(double input) {
+        int bound = (int) input;
         record = new int[bound];
 
         // i is 3a - z
@@ -41,16 +41,6 @@ public class P136 implements Solution {
         }
 
         return result;
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see org.hamster.project_euler.base.Solution#solutionTest(double)
-     */
-    @Override
-    public double solutionTest(double input) {
-        return 0;
     }
 
 }

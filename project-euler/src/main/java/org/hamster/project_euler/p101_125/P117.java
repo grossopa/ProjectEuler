@@ -15,20 +15,10 @@ public class P117 implements Solution {
     /*
      * (non-Javadoc)
      * 
-     * @see org.hamster.project_euler.base.Solution#solution()
-     */
-    @Override
-    public double solution() {
-        return solutionTest(50);
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
      * @see org.hamster.project_euler.base.Solution#solutionTest(double)
      */
     @Override
-    public double solutionTest(double blackCount) {
+    public Number solution(double blackCount) {
         double result = 0;
         for (int i = 0; i < blackCount; i++) { // 2
             for (int j = 0; j < blackCount; j++) { // 3
@@ -37,9 +27,8 @@ public class P117 implements Solution {
                     if (length < i + j + k) {
                         continue;
                     }
-                    
-                    result += EulerMathUtils.combinationCount(i + j + k, length)
-                            * EulerMathUtils.combinationCount(i, i + j + k)
+
+                    result += EulerMathUtils.combinationCount(i + j + k, length) * EulerMathUtils.combinationCount(i, i + j + k)
                             * EulerMathUtils.combinationCount(j, j + k);
                 }
             }

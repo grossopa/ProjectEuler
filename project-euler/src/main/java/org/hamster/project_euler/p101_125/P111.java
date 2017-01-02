@@ -13,13 +13,7 @@ import org.hamster.project_euler.util.EulerMathUtils;
  */
 public class P111 implements Solution {
 
-    @Override
-    public double solution() {
-        return solutionTest(10);
-    }
-
-    @Override
-    public double solutionTest(double n) {
+    public Number solution(double n) {
 
         int[] number = new int[(int) n];
         long result = 0;

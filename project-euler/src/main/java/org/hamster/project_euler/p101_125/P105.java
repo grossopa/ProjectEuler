@@ -20,7 +20,7 @@ import org.hamster.project_euler.util.EulerFileUtils;
 public class P105 implements Solution {
 
     @Override
-    public double solution() {
+    public Number solution(double input) {
 
         List<long[]> items = EulerFileUtils.readAsLong("src/main/java/org/hamster/project_euler/p101_125/p105_sets.txt");
         long sum = 0;
@@ -30,16 +30,6 @@ public class P105 implements Solution {
             }
         }
         return sum;
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see org.hamster.project_euler.base.Solution#solutionTest(double)
-     */
-    @Override
-    public double solutionTest(double input) {
-        return 0;
     }
 
 }

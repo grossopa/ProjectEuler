@@ -5,7 +5,7 @@ package org.hamster.project_euler.test.p101_125;
 
 import org.hamster.project_euler.p101_125.P116;
 import org.hamster.project_euler.test.base.AbstractSolutionTest;
-import org.junit.Test;
+import org.hamster.project_euler.test.base.TestResult;
 
 /**
  * @author <a href="mailto:grossopaforever@gmail.com">Jack Yin</a>
@@ -13,20 +13,34 @@ import org.junit.Test;
  */
 public class P116Test extends AbstractSolutionTest<P116> {
 
+    /*
+     * 
+     * (non-Javadoc)
+     *
+     * @see org.hamster.project_euler.test.base.AbstractSolutionTest#problemClass()
+     */
     @Override
     public Class<P116> problemClass() {
         return P116.class;
     }
 
-    @Test
+    /*
+     * (non-Javadoc)
+     *
+     * @see org.hamster.project_euler.test.base.AbstractSolutionTest#example()
+     */
     @Override
-    public void testSolution() {
-        invoke(20492570929D);
+    protected TestResult example() {
+        return TestResult.create(5, 12);
     }
 
-    @Test
+    /*
+     * (non-Javadoc)
+     *
+     * @see org.hamster.project_euler.test.base.AbstractSolutionTest#solution()
+     */
     @Override
-    public void testExample() {
-        invokeTest(12, 5);
+    protected TestResult solution() {
+        return TestResult.create(50, 20492570929D);
     }
 }

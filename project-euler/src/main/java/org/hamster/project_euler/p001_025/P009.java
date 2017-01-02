@@ -29,20 +29,10 @@ public class P009 implements Solution {
     /*
      * (non-Javadoc)
      * 
-     * @see org.hamster.project_euler.base.Solution#solution()
-     */
-    @Override
-    public double solution() {
-        return solutionTest(1000);
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
      * @see org.hamster.project_euler.base.Solution#solutionTest(double)
      */
     @Override
-    public double solutionTest(double input) {
+    public Number solution(double input) {
         for (int b = 1; b <= 998; b++) {
             double a = (1000_000 - 2000 * b) / (2000 - 2 * b);
             if (a == (int) a && 1000 - a - b > 0 && a * a + b * b == (1000 - a - b) * (1000 - a - b)) {

@@ -17,7 +17,7 @@ import org.hamster.project_euler.util.EulerArrayUtils;
 public class P118 implements Solution {
 
     @Override
-    public double solution() {
+    public Number solution(double input) {
         List<Long> arr = new ArrayList<>();
         arr.add(1L);
         arr.add(2L);
@@ -97,16 +97,7 @@ public class P118 implements Solution {
      */
     private boolean isPrime(long n) {
         return BigInteger.valueOf(n).isProbablePrime(10);
-        // this is not correct????
-        // return EulerMathUtils.isProbablePrime(BigInteger.valueOf(n), EulerMathUtils.AR6);
     }
 
-    /* (non-Javadoc)
-     * @see org.hamster.project_euler.base.Solution#solutionTest(double)
-     */
-    @Override
-    public double solutionTest(double input) {
-        return 0;
-    }
 
 }

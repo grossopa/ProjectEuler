@@ -12,23 +12,13 @@ import org.hamster.project_euler.util.EulerMathUtils;
  */
 public class P010 implements Solution {
 
-    /* 
-     * (non-Javadoc)
-     *
-     * @see org.hamster.project_euler.base.Solution#solution()
-     */
-    @Override
-    public double solution() {
-        return solutionTest(2_000_000);
-    }
-
-    /* 
+    /*
      * (non-Javadoc)
      *
      * @see org.hamster.project_euler.base.Solution#solutionTest(double)
      */
     @Override
-    public double solutionTest(double input) {
+    public Number solution(double input) {
         boolean[] composites = EulerMathUtils.primes((int) input);
         double result = 0;
         for (int i = 1; i < input; i++) {

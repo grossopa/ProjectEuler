@@ -12,15 +12,6 @@ import org.hamster.project_euler.util.EulerMathUtils;
  */
 public class P003 implements Solution {
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see org.hamster.project_euler.base.Solution#solution()
-     */
-    @Override
-    public double solution() {
-        return solutionTest(600_851_475_143D);
-    }
 
     /*
      * (non-Javadoc)
@@ -28,7 +19,7 @@ public class P003 implements Solution {
      * @see org.hamster.project_euler.base.Solution#solutionTest(double)
      */
     @Override
-    public double solutionTest(double input) {
+    public Number solution(double input) {
         int max = (int) Math.sqrt(input);
         
         if ((max & 1) != 0) {

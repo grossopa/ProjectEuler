@@ -189,7 +189,7 @@ public class P103 implements Solution {
     }
 
     @Override
-    public double solution() {
+    public Number solution(double input) {
 //        System.out.println(isSpecialSum(new long[] { 81, 82, 99, 85 }));
 //        System.out.println(isSpecialSum(new long[] { 81, 88, 75, 42, 87, 84, 86, 65 }));
 //        System.out.println(isSpecialSum(new long[] { 157, 150, 164, 119, 79, 159, 161, 139, 158 }));
@@ -197,21 +197,13 @@ public class P103 implements Solution {
 //        System.out.println(Arrays.toString(findNextOptimumSet(new long[] { 2, 3, 4 })));
 //        System.out.println(Arrays.toString(findNextOptimumSet(new long[] { 3, 5, 6, 7 })));
 //
-        long[] result = findNearOptimumSet(7);
+        long[] result = findNearOptimumSet((int) input);
         
         long finalResult = 0;
         for (int i = result.length - 1; i >= 0; i--) {
             finalResult += (long) (result[i] * Math.pow(100, result.length - 1 - i));
         }
         return finalResult;
-    }
-
-    /* (non-Javadoc)
-     * @see org.hamster.project_euler.base.Solution#solutionTest(double)
-     */
-    @Override
-    public double solutionTest(double input) {
-        return 0;
     }
 
 }

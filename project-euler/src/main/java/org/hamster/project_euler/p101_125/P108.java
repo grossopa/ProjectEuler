@@ -24,7 +24,7 @@ public class P108 implements Solution {
      * the formula for a number with duplication is C(r + k - 1, r)
      */
     @Override
-    public double solutionTest(double minCombinationCount) {
+    public Number solution(double minCombinationCount) {
         for (long n = 2;; n++) {
             long t = (long) Math.pow(n, 2);
             long k = 0;
@@ -68,18 +68,5 @@ public class P108 implements Solution {
         return result;
         
     }
-
-    @Override
-    public double solution() {
-        return solutionTest(1001);
-    }
-/*
-    *//**
-     * @param args
-     *//*
-    public static void main(String[] args) {
-        SolutionUtils.invokeSolutionTest(P108.class, 4, 3);
-        SolutionUtils.invoke(P108.class, 0);
-    }*/
 
 }
