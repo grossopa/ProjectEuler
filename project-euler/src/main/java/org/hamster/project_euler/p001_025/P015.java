@@ -13,12 +13,12 @@ import org.hamster.project_euler.util.EulerMathUtils;
 public class P015 implements Solution {
 
     /**
-     * It can be abstracted to an 
+     * It takes input * 2 steps to reach the right bottom corner, and input number for right and input number for
+     * bottom, hence the question would be to put input number of items to input * 2 baskets.
      */
     @Override
     public Number solution(double input) {
         return EulerMathUtils.combinationCountBig(input, input * 2);
     }
-
 
 }
