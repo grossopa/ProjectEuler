@@ -77,7 +77,9 @@ public class EulerMathUtils {
     }
 
     /**
-     * finds all primes represented by <tt>boolean[n] == false</tt>
+     * Sieve of Eratosthenes<br>
+     * 
+     * Finds all primes represented by <tt>boolean[n] == false</tt>
      * 
      * @param n
      * @return the boolean list
@@ -92,6 +94,8 @@ public class EulerMathUtils {
                 }
             }
         }
+        composites[0] = true;
+        composites[1] = true;
         return composites;
     }
 
