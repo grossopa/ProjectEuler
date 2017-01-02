@@ -20,7 +20,7 @@ public class P012Test extends AbstractSolutionTest<P012> {
      */
     @Override
     protected TestResult example() {
-        return null;
+        return TestResult.create(5, 28);
     }
 
     /*
@@ -30,7 +30,7 @@ public class P012Test extends AbstractSolutionTest<P012> {
      */
     @Override
     protected TestResult solution() {
-        return null;
+        return TestResult.create(500, 76576500);
     }
 
     /*
