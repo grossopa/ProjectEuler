@@ -6,8 +6,9 @@ package org.hamster.project_euler.test.base;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
 import org.hamster.project_euler.base.Solution;
-import org.junit.Assert;
 import org.junit.Test;
 
 /**
@@ -74,11 +75,12 @@ public abstract class AbstractSolutionTest<P extends Solution> {
      * @throws InstantiationException
      */
     public final void invoke(double input, Number expectedResult, boolean showAnswer) throws InstantiationException, IllegalAccessException {
-        Number r = problemClass().newInstance().solution(input);
+        Number result = problemClass().newInstance().solution(input);
         if (showAnswer) {
-            System.out.println(problemClass().getSimpleName() + " answer is : " + toBigDecimal(r).toPlainString());
+            System.out.println(problemClass().getSimpleName() + " answer is : " + toBigDecimal(result).toPlainString());
         }
-        Assert.assertEquals(toBigDecimal(expectedResult), toBigDecimal(r));
+
+        MatcherAssert.assertThat(toBigDecimal(result), Matchers.closeTo(toBigDecimal(expectedResult), BigDecimal.valueOf(0.00001D)));
     }
 
     protected static BigDecimal toBigDecimal(Number num) {

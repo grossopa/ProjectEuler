@@ -14,6 +14,8 @@ import java.util.Map;
  */
 public class EulerMathUtils {
 
+    public static final BigInteger TWO = BigInteger.valueOf(2);
+
     private EulerMathUtils() {
         // do nothing
     }
@@ -30,9 +32,21 @@ public class EulerMathUtils {
         return result / EulerMathUtils.factorial(m);
     }
 
+    public static BigInteger combinationCountBig(double m, double n) {
+        if (2 * m > n) {
+            m = n - m;
+        }
+        
+        BigInteger result = BigInteger.ONE;
+        for (double i = 0; n - i >= n - m + 1; i++) {
+            result = result.multiply(BigInteger.valueOf((long) (n - i)));
+        }
+        return result.divide(factorialBig(m));
+    }
+
     public static double permutationCount(double m, double n) {
         double result = 1;
-        for (double i = n; i <= n - m + 1; n++) {
+        for (double i = n; i >= n - m + 1; i--) {
             result *= i;
         }
         return result;
@@ -48,6 +62,14 @@ public class EulerMathUtils {
         double r = 1;
         for (double i = 1; i <= n; i++) {
             r *= i;
+        }
+        return r;
+    }
+    
+    public static final BigInteger factorialBig(double n) {
+        BigInteger r = BigInteger.ONE;
+        for (long i = 1; i <= n; i++) {
+            r = r.multiply(BigInteger.valueOf(i));
         }
         return r;
     }
@@ -158,7 +180,7 @@ public class EulerMathUtils {
     public static boolean isPrime(double n) {
         return isPrime(BigDecimal.valueOf(n).toBigInteger());
     }
-    
+
     /**
      * A palindromic number reads the same both ways.
      * 
@@ -175,7 +197,7 @@ public class EulerMathUtils {
         }
         return true;
     }
-    
+
     /**
      * Finds all prime factors (with count of each)
      * 
@@ -185,7 +207,7 @@ public class EulerMathUtils {
     public static final Map<Double, Long> primeFactorization(long n) {
         return primeFactorization((double) n);
     }
-    
+
     /**
      * Finds all prime factors (with count of each)
      * 
@@ -197,7 +219,7 @@ public class EulerMathUtils {
         if (EulerMathUtils.isPrime(n)) {
             result.put(n, 1L);
         }
-        
+
         double max = Math.sqrt(n);
         double num = n;
         for (double i = 2; i <= max; i++) {
