@@ -4,6 +4,7 @@
 package org.hamster.project_euler.p001_025;
 
 import org.hamster.project_euler.base.Solution;
+import org.hamster.project_euler.util.EulerMathUtils;
 
 /**
  * @author <a href="mailto:grossopaforever@gmail.com">Jack Yin</a>
@@ -20,9 +21,9 @@ public class P021 implements Solution {
     public Number solution(double input) {
         double bound = input - 1;
         double result = 0;
-        for (int i = 2; i < bound; i++) {
-            int divisorSum = getDivisorSum(i);
-            if (i != divisorSum && i == getDivisorSum(divisorSum)) {
+        for (double i = 2; i < bound; i++) {
+            double divisorSum = EulerMathUtils.getDivisorSum(i);
+            if (i != divisorSum && i == EulerMathUtils.getDivisorSum(divisorSum)) {
                 result += i + divisorSum;
             }
         }
@@ -30,14 +31,5 @@ public class P021 implements Solution {
         return result / 2;
     }
 
-    private int getDivisorSum(int n) {
-        int sum = 0;
-        for (int i = 1; i <= (int) (n / 2); i++) {
-            if (n % i == 0) {
-                sum += i;
-            }
-        }
-        return sum;
-    }
 
 }

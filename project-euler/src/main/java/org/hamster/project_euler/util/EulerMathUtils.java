@@ -36,7 +36,7 @@ public class EulerMathUtils {
         if (2 * m > n) {
             m = n - m;
         }
-        
+
         BigInteger result = BigInteger.ONE;
         for (double i = 0; n - i >= n - m + 1; i++) {
             result = result.multiply(BigInteger.valueOf((long) (n - i)));
@@ -65,7 +65,7 @@ public class EulerMathUtils {
         }
         return r;
     }
-    
+
     public static final BigInteger factorialBig(double n) {
         BigInteger r = BigInteger.ONE;
         for (long i = 1; i <= n; i++) {
@@ -142,7 +142,7 @@ public class EulerMathUtils {
     }
 
     /**
-     * Uses default Miller¨CRabin primality test
+     * Uses default Millerï¿½CRabin primality test
      * 
      * @param n
      * @return true if the number is prime
@@ -152,7 +152,7 @@ public class EulerMathUtils {
     }
 
     /**
-     * Uses default Miller¨CRabin primality test
+     * Uses default Millerï¿½CRabin primality test
      * 
      * @param n
      * @return true if the number is prime
@@ -162,7 +162,7 @@ public class EulerMathUtils {
     }
 
     /**
-     * Uses default Miller¨CRabin primality test
+     * Uses default Millerï¿½CRabin primality test
      * 
      * @param n
      * @return true if the number is prime
@@ -172,7 +172,7 @@ public class EulerMathUtils {
     }
 
     /**
-     * Uses default Miller¨CRabin primality test
+     * Uses default Millerï¿½CRabin primality test
      * 
      * @param n
      * @return true if the number is prime
@@ -239,6 +239,22 @@ public class EulerMathUtils {
             result.put(num, 1L);
         }
         return result;
+    }
+
+    /**
+     * e.g. 12 as 1 + 2 + 3 + 4 + 6 = 16
+     * 
+     * @param n
+     * @return
+     */
+    public static double getDivisorSum(double n) {
+        double sum = 0;
+        for (double i = 1; i <= Math.floor(n / 2); i++) {
+            if (n % i == 0) {
+                sum += i;
+            }
+        }
+        return sum;
     }
 
 }
