@@ -11,10 +11,10 @@ import org.hamster.project_euler.base.Solution;
  */
 public class P025 implements Solution {
 
-    /*
-     * (non-Javadoc)
+    /**
+     * Always divides current number till number &lt; 10 and store the digit count until the digits equals the required
+     * number.
      * 
-     * @see org.hamster.project_euler.base.Solution#solution(double)
      */
     @Override
     public Number solution(double input) {
