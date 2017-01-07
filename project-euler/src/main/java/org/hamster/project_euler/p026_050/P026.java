@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.hamster.project_euler.P026_050;
+package org.hamster.project_euler.p026_050;
 
 import org.hamster.project_euler.base.Solution;
 

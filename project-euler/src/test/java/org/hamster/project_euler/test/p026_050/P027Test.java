@@ -3,7 +3,7 @@
  */
 package org.hamster.project_euler.test.p026_050;
 
-import org.hamster.project_euler.P026_050.P027;
+import org.hamster.project_euler.p026_050.P027;
 import org.hamster.project_euler.test.base.AbstractSolutionTest;
 import org.hamster.project_euler.test.base.TestResult;
 

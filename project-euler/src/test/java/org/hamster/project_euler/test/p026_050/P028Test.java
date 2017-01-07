@@ -3,7 +3,7 @@
  */
 package org.hamster.project_euler.test.p026_050;
 
-import org.hamster.project_euler.p026_050.P026;
+import org.hamster.project_euler.p026_050.P028;
 import org.hamster.project_euler.test.base.AbstractSolutionTest;
 import org.hamster.project_euler.test.base.TestResult;
 
@@ -11,7 +11,7 @@ import org.hamster.project_euler.test.base.TestResult;
  * @author <a href="mailto:grossopaforever@gmail.com">Jack Yin</a>
  * @version 1.0
  */
-public class P026Test extends AbstractSolutionTest<P026> {
+public class P028Test extends AbstractSolutionTest<P028> {
 
     /*
      * (non-Javadoc)
@@ -20,7 +20,7 @@ public class P026Test extends AbstractSolutionTest<P026> {
      */
     @Override
     protected TestResult example() {
-        return TestResult.create(10, 7);
+        return null;
     }
 
     /*
@@ -30,7 +30,7 @@ public class P026Test extends AbstractSolutionTest<P026> {
      */
     @Override
     protected TestResult solution() {
-        return TestResult.create(1000, 983);
+        return null;
     }
 
     /*
@@ -39,8 +39,8 @@ public class P026Test extends AbstractSolutionTest<P026> {
      * @see org.hamster.project_euler.test.base.AbstractSolutionTest#problemClass()
      */
     @Override
-    protected Class<P026> problemClass() {
-        return P026.class;
+    protected Class<P028> problemClass() {
+        return P028.class;
     }
 
 }
