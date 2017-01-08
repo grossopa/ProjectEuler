@@ -258,7 +258,7 @@ public class EulerMathUtils {
         }
         return sum;
     }
-    
+
     /**
      * finds all divisors not including n itself
      * 
@@ -267,15 +267,15 @@ public class EulerMathUtils {
      */
     public static List<Double> divisors(double n) {
         List<Double> result = new ArrayList<>((int) Math.sqrt(n));
-        
+
         for (double i = 1; i <= Math.floor(n / 2); i++) {
             if (n % i == 0) {
                 result.add(i);
             }
         }
-        
+
         return result;
-        
+
     }
 
 }
