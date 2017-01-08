@@ -55,7 +55,7 @@ public class P023 implements Solution {
      * @return
      */
     public boolean isAbundant(double number) {
-        double divisorSum = EulerMathUtils.getDivisorSum(number);
+        double divisorSum = EulerMathUtils.divisorSum(number);
         return divisorSum > number;
     }
 

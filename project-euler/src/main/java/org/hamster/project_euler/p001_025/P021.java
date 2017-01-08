@@ -22,8 +22,8 @@ public class P021 implements Solution {
         double bound = input - 1;
         double result = 0;
         for (double i = 2; i < bound; i++) {
-            double divisorSum = EulerMathUtils.getDivisorSum(i);
-            if (i != divisorSum && i == EulerMathUtils.getDivisorSum(divisorSum)) {
+            double divisorSum = EulerMathUtils.divisorSum(i);
+            if (i != divisorSum && i == EulerMathUtils.divisorSum(divisorSum)) {
                 result += i + divisorSum;
             }
         }

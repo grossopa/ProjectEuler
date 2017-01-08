@@ -5,7 +5,9 @@ package org.hamster.project_euler.util;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -247,7 +249,7 @@ public class EulerMathUtils {
      * @param n
      * @return
      */
-    public static double getDivisorSum(double n) {
+    public static double divisorSum(double n) {
         double sum = 0;
         for (double i = 1; i <= Math.floor(n / 2); i++) {
             if (n % i == 0) {
@@ -255,6 +257,25 @@ public class EulerMathUtils {
             }
         }
         return sum;
+    }
+    
+    /**
+     * finds all divisors not including n itself
+     * 
+     * @param n
+     * @return
+     */
+    public static List<Double> divisors(double n) {
+        List<Double> result = new ArrayList<>((int) Math.sqrt(n));
+        
+        for (double i = 1; i <= Math.floor(n / 2); i++) {
+            if (n % i == 0) {
+                result.add(i);
+            }
+        }
+        
+        return result;
+        
     }
 
 }
