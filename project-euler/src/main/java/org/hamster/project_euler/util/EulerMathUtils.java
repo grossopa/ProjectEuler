@@ -191,6 +191,10 @@ public class EulerMathUtils {
      */
     public static final boolean isPalindromic(long n) {
         char[] s = String.valueOf(n).toCharArray();
+        return isPalindromic(s);
+    }
+    
+    public static final boolean isPalindromic(char[] s) {
         int l = s.length;
         for (int i = 0; i < l / 2; i++) {
             if (s[i] != s[l - i - 1]) {
@@ -275,7 +279,16 @@ public class EulerMathUtils {
         }
 
         return result;
+    }
 
+    /**
+     * finds digit count
+     * 
+     * @param n
+     * @return
+     */
+    public static int digitCount(double n) {
+        return (int) (Math.log10(n) + 1);
     }
 
 }
