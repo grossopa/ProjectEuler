@@ -290,5 +290,15 @@ public class EulerMathUtils {
     public static int digitCount(double n) {
         return (int) (Math.log10(n) + 1);
     }
+    
+    /**
+     * finds first digit
+     * 
+     * @param n
+     * @return
+     */
+    public static int firstDigit(double n) {
+        return (int) (n / Math.pow(10, digitCount(n) - 1));
+    }
 
 }
