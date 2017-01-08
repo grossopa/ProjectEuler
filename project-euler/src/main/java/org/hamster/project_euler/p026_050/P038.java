@@ -34,13 +34,16 @@ public class P038 implements Solution {
         int minimalDigits = 0;
 
         for (int i = 1; minimalDigits < 6; i++) {
+            // minimal digits for i * n == 2 must be <= 5, so i + i * 2 digits would be 9
             minimalDigits = EulerMathUtils.digitCount(i * 2);
 
             if (EulerMathUtils.firstDigit(i) != 9) {
+                // first digit must be 9
                 continue;
             }
 
             for (int n = 2; n <= 9; n++) {
+                // should skip when used number is not exactly once for 1-9
                 boolean skip = false;
                 int usedNumber = 0;
                 int[] products = new int[n + 1];
@@ -67,6 +70,7 @@ public class P038 implements Solution {
                     continue;
                 }
 
+                // combine these numbers
                 int num = 0;
                 int nextDigit = 0;
                 for (int j = n; j >= 1; j--) {
