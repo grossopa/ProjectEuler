@@ -21,13 +21,13 @@ public class EulerCallbackUtilsTest {
         int[] numbers = new int[] { 2, 4, 6 };
         final int[] result = new int[(int) EulerMathUtils.permutationCount(3, 3)];
         int[] index = new int[] { 0 };
-        EulerCallbackUtils.permutationDigits(new Function<Integer, Integer>() {
+        EulerCallbackUtils.permutationDigits(new Function<Integer, Boolean>() {
 
             @Override
-            public Integer apply(Integer t) {
+            public Boolean apply(Integer t) {
                 result[index[0]] = t;
                 index[0]++;
-                return 1;
+                return true;
             }
 
         }, numbers);
