@@ -19,12 +19,12 @@ public class EulerCallbackUtilsTest {
     @Test
     public void tesetPermutation() {
         int[] numbers = new int[] { 2, 4, 6 };
-        final int[] result = new int[(int) EulerMathUtils.permutationCount(3, 3)];
+        final long[] result = new long[(int) EulerMathUtils.permutationCount(3, 3)];
         int[] index = new int[] { 0 };
-        EulerCallbackUtils.permutationDigits(new Function<Integer, Boolean>() {
+        EulerCallbackUtils.permutationDigits(new Function<Long, Boolean>() {
 
             @Override
-            public Boolean apply(Integer t) {
+            public Boolean apply(Long t) {
                 result[index[0]] = t;
                 index[0]++;
                 return true;
@@ -32,7 +32,7 @@ public class EulerCallbackUtilsTest {
 
         }, numbers);
 
-        int prev = -1;
+        long prev = -1;
         for (int i = 0; i < result.length; i++) {
             Assert.assertTrue(prev < result[i]);
             prev = result[i];

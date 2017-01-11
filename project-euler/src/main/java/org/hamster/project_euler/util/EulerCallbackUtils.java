@@ -13,7 +13,7 @@ import java.util.function.Function;
  */
 public final class EulerCallbackUtils {
 
-    public static void permutationDigits(Function<Integer, Boolean> function, int n) {
+    public static void permutationDigits(Function<Long, Boolean> function, int n) {
         int[] numbers = new int[n];
         for (int i = 0; i < n; i++) {
             numbers[i] = i + 1;
@@ -21,7 +21,7 @@ public final class EulerCallbackUtils {
         permutationDigits(function, numbers);
     }
 
-    public static void permutationDigits(Function<Integer, Boolean> function, int[] numbers) {
+    public static void permutationDigits(Function<Long, Boolean> function, int[] numbers) {
         int l = numbers.length;
         int[] numberIndex = new int[l];
         for (int i = 0; i < l; i++) {
@@ -34,10 +34,10 @@ public final class EulerCallbackUtils {
     private static final class PermutationIterator {
         private final int[] numberIndex;
         private final int[] numbers;
-        private final Function<Integer, Boolean> function;
+        private final Function<Long, Boolean> function;
         private boolean shouldContinue = true;
 
-        PermutationIterator(int[] numberIndex, int[] numbers, Function<Integer, Boolean> function) {
+        PermutationIterator(int[] numberIndex, int[] numbers, Function<Long, Boolean> function) {
             this.numberIndex = numberIndex;
             this.numbers = numbers;
             this.function = function;
@@ -55,7 +55,7 @@ public final class EulerCallbackUtils {
                 int nextUsed = usedNumber | numberIndex[i];
                 picked[index] = numbers[i];
                 if (index == l - 1) {
-                    int num = 0;
+                    long num = 0;
                     for (int p = 0; p < picked.length; p++) {
                         num += picked[p] * Math.pow(10, l - p - 1);
                     }

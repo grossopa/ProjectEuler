@@ -23,7 +23,7 @@ public class P041 implements Solution {
     @Override
     public Number solution(double input) {
 
-        final int[] result = new int[1];
+        final long[] result = new long[1];
 
         for (int i = 9; i >= 1; i--) {
             int[] numbers = new int[i];
@@ -31,7 +31,7 @@ public class P041 implements Solution {
                 numbers[n] = i - n;
             }
 
-            EulerCallbackUtils.permutationDigits(new Function<Integer, Boolean>() {
+            EulerCallbackUtils.permutationDigits(new Function<Long, Boolean>() {
 
                 /*
                  * (non-Javadoc)
@@ -39,7 +39,7 @@ public class P041 implements Solution {
                  * @see java.util.function.Function#apply(java.lang.Object)
                  */
                 @Override
-                public Boolean apply(Integer t) {
+                public Boolean apply(Long t) {
                     if (EulerMathUtils.isPrime(t)) {
                         result[0] = t;
                         return false;
