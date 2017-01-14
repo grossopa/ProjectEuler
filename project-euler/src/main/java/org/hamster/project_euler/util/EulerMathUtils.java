@@ -7,6 +7,7 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -122,6 +123,21 @@ public class EulerMathUtils {
         composites[1] = true;
         return composites;
     }
+    
+    public static List<Integer> primesAsList(boolean[] composites) {
+        List<Integer> result = new LinkedList<>();
+        for (int i = 2; i < composites.length; i++) {
+            if (!composites[i]) {
+                result.add(i);
+            }
+        }
+        return result;
+    }
+    
+    public static List<Integer> primesAsList(int n) {
+        boolean[] composites = primes(n);
+        return primesAsList(composites);
+    }
 
     public static boolean[][] primesBig(long n) {
         if (n < Integer.MAX_VALUE) {
@@ -215,7 +231,7 @@ public class EulerMathUtils {
     }
 
     /**
-     * Finds all prime factors (with count of each)
+     * Finds all prime factors (with count of each) // TODO is not correct
      * 
      * @param n
      * @return primes / count
