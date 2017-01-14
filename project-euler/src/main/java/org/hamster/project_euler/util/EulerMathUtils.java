@@ -308,6 +308,24 @@ public class EulerMathUtils {
     }
     
     /**
+     * gets all digits in an array
+     * 
+     * @param n
+     * @return
+     */
+    public static int[] digits(double n) {
+        int digitCount = digitCount(n);
+        int [] digits = new int[digitCount];
+        double num = n;
+        int index = 0;
+        do {
+            digits[index++] = (int) (num % 10);
+            num = Math.floor(num / 10);
+        } while (num > 0);
+        return digits;
+    }
+    
+    /**
      * finds first digit
      * 
      * @param n
