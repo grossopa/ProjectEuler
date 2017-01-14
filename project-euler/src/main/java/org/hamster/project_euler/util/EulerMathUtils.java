@@ -300,5 +300,14 @@ public class EulerMathUtils {
     public static int firstDigit(double n) {
         return (int) (n / Math.pow(10, digitCount(n) - 1));
     }
+    
+    /**
+     * determines a double/float number is actually an Integer
+     * @param num
+     * @return
+     */
+    public static boolean isInteger(double num) {
+        return Math.abs(num - (long) num) < 0.0000001D;
+    }
 
 }
