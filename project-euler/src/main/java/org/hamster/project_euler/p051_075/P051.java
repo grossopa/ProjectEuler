@@ -14,7 +14,14 @@ import org.hamster.project_euler.util.EulerMathUtils;
  */
 public class P051 implements Solution {
 
+    /**
+     * digit cache to avoid duplicate calculation
+     */
     private static final int[] DIGIT_CACHE = new int[] { 0, 1, 2, 4, 8, 16, 32, 64, 128 };
+
+    /**
+     * Math.pow(10, n) cache to avoid duplicate calculation
+     */
     private static final int[] TEN_POW_CACHE = new int[] { 1, 10, 100, 1000, 10000, 100_000, 1_000_000, 10_000_000 };
 
     /*
@@ -28,6 +35,7 @@ public class P051 implements Solution {
         Integer[] primes = EulerMathUtils.primesAsList(composites).toArray(new Integer[] {});
 
         int result = Integer.MAX_VALUE;
+        // starts from 3 digits
         int previousDigitCount = 3;
 
         for (int prime : primes) {
@@ -37,11 +45,15 @@ public class P051 implements Solution {
 
             int[] digits = EulerMathUtils.digits(prime);
             int digitCount = digits.length;
+            // if digit increases and already got a minimal number then
+            // we break here and return the final result
             if (previousDigitCount != digitCount && result != Integer.MAX_VALUE) {
                 break;
             }
             previousDigitCount = digitCount;
+            // digit flag uses 2-bit to indicate digits should be replaced
             int digitFlag = (int) (Math.pow(2, digitCount - 1) - 1);
+
             for (int df = 1; df <= digitFlag; df++) {
                 // starts from the second digit
                 int primesCount = 0;
@@ -64,6 +76,7 @@ public class P051 implements Solution {
                     }
 
                     if (!composites[num]) {
+                        // just need the minimal prime of the family
                         minPrime = Math.min(minPrime, num);
                         primesCount++;
                     }
