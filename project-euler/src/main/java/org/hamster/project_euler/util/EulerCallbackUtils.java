@@ -25,7 +25,7 @@ public final class EulerCallbackUtils {
         int l = numbers.length;
         int[] numberIndex = new int[l];
         for (int i = 0; i < l; i++) {
-            numberIndex[i] = (int) Math.pow(2, numbers[i]);
+            numberIndex[i] = (int) Math.pow(2, i);
         }
 
         new PermutationIterator(numberIndex, numbers, function).permutationDigits(0, 0, new int[l]);
@@ -49,10 +49,11 @@ public final class EulerCallbackUtils {
             }
             int l = numberIndex.length;
             for (int i = 0; i < l; i++) {
-                if ((numberIndex[i] & usedNumber) != 0) {
+                int usedIndexValue = (int) Math.pow(2, i);
+                if ((usedIndexValue & usedNumber) != 0) {
                     continue;
                 }
-                int nextUsed = usedNumber | numberIndex[i];
+                int nextUsed = usedNumber | usedIndexValue;
                 picked[index] = numbers[i];
                 if (index == l - 1) {
                     long num = 0;
