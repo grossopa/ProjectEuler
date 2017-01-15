@@ -59,6 +59,98 @@ public class P054 implements Solution {
         };
     }
 
+    private Rank onePair() {
+        return new Rank(2) {
+
+            @Override
+            public boolean match(Card[] cards) {
+                int num = 0;
+                for (Card card : cards) {
+                    if ((num & card.getVal()) != 0) {
+                        return true;
+                    }
+                    num = num | card.getVal();
+                }
+                return false;
+            }
+
+            @Override
+            public Result fight(Card[] cardsP1, Card[] cardsP2) {
+                return Result.of(Integer.compare(getPairValue(cardsP1), getPairValue(cardsP2)));
+            }
+
+            private int getPairValue(Card[] cards) {
+                int num = 0;
+                for (Card card : cards) {
+                    if ((num & card.getVal()) != 0) {
+                        return card.getVal();
+                    }
+                    num = num | card.getVal();
+                }
+                return -1;
+            }
+
+        };
+    }
+
+    public Rank twoPairs() {
+        return new Rank(3) {
+
+            @Override
+            public boolean match(Card[] cards) {
+                int num = 0;
+                int count = 0;
+                for (Card card : cards) {
+                    if ((num & card.getVal()) != 0) {
+                        count++;
+                        if (count == 2) {
+                            // not necessary to consider three of a kind
+                            return true;
+                        }
+                    }
+                    num = num | card.getVal();
+                }
+                return false;
+            }
+
+            @Override
+            public Result fight(Card[] cardsP1, Card[] cardsP2) {
+                return Result.of(Integer.compare(getHighestPairValue(cardsP1), getHighestPairValue(cardsP2)));
+            }
+
+            private int getHighestPairValue(Card[] cards) {
+                int num = 0;
+                int max = 0;
+                for (Card card : cards) {
+                    if ((num & card.getVal()) != 0) {
+                        max = Math.max(num, max);
+                    }
+                    num = num | card.getVal();
+                }
+                return max;
+            }
+        };
+    }
+
+    public Rank threeOfAKind() {
+        return new Rank(4) {
+
+            @Override
+            public boolean match(Card[] cards) {
+                for (Card card : cards) {
+                    
+                }
+                return false;
+            }
+
+            @Override
+            public Result fight(Card[] cardsP1, Card[] cardsP2) {
+                return null;
+            }
+
+        };
+    }
+
 }
 
 /**
@@ -109,8 +201,8 @@ class Card {
 }
 
 enum CardValue {
-    ONE("1", 1), TWO("2", 2), THREE("3", 3), FOUR("4", 4), FIVE("5", 5), SIX("6", 6), SEVEN("7", 7), EIGHT("8", 8), NINE("9", 9), TEN("T",
-            10), JACK("J", 11), QUEEN("Q", 12), KING("K", 13), ACE("A", 14);
+    ONE("1", 1), TWO("2", 2), THREE("3", 4), FOUR("4", 8), FIVE("5", 16), SIX("6", 32), SEVEN("7", 64), EIGHT("8", 128), NINE("9", 256), TEN("T",
+            512), JACK("J", 1024), QUEEN("Q", 2048), KING("K", 4096), ACE("A", 8192);
 
     private final String key;
     private final int val;
