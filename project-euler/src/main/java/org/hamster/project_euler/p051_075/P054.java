@@ -3,22 +3,15 @@
  */
 package org.hamster.project_euler.p051_075;
 
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 import org.hamster.project_euler.base.Solution;
 import org.hamster.project_euler.util.EulerFileUtils;
 
 /**
- * High Card: Highest value card.<br>
- * One Pair: Two cards of the same value.<br>
- * Two Pairs: Two different pairs.<br>
- * Three of a Kind: Three cards of the same value.<br>
- * Straight: All cards are consecutive values.<br>
- * Flush: All cards of the same suit.<br>
- * Full House: Three of a kind and a pair.<br>
- * Four of a Kind: Four cards of the same value.<br>
- * Straight Flush: All cards are consecutive values of same suit.<br>
- * Royal Flush: Ten, Jack, Queen, King, Ace, in same suit.<br>
+ * 
  * 
  * @author <a href="mailto:grossopaforever@gmail.com">Jack Yin</a>
  * @version 1.0
@@ -34,8 +27,68 @@ public class P054 implements Solution {
      */
     @Override
     public Number solution(double input) {
+        Rank[] ranks = getRanks();
+
+        List<String> lines = EulerFileUtils
+                .readAsLines("src/main/java/org/hamster/project_euler/p051_075/P054_poker.txt");
+        int winP1 = 0;
+
+        for (String line : lines) {
+            String[] cardStr = line.split(" ");
+            Card[] cardsP1 = new Card[5];
+            Card[] cardsP2 = new Card[5];
+            for (int i = 0; i < 5; i++) {
+                cardsP1[i] = Card.of(cardStr[i]);
+            }
+            for (int i = 5; i < 10; i++) {
+                cardsP2[i - 5] = Card.of(cardStr[i]);
+            }
+
+            // order from smallest to largest
+            Comparator<Card> comparator = new Comparator<Card>() {
+
+                @Override
+                public int compare(Card o1, Card o2) {
+                    return Integer.compare(o1.getVal(), o2.getVal());
+                }
+            };
+
+            Arrays.sort(cardsP1, comparator);
+            Arrays.sort(cardsP2, comparator);
+
+            // get rank details for P1 and P2
+            int[] rank1 = doRank(cardsP1, ranks);
+            int[] rank2 = doRank(cardsP2, ranks);
+
+            // first to compare rank
+            if (rank1[0] > rank2[0]) {
+                winP1++;
+                continue;
+            } else if (rank1[0] == rank2[0]) {
+                // ranks are equal then compare value
+                if (rank1[1] > rank2[1]) {
+                    winP1++;
+                } else if (rank1[1] == rank2[1]) {
+                    // ranks and values are equal then compare one by one
+                    // also verified there's no draw game
+                    int largest = doLargest(cardsP1, cardsP2);
+                    if (largest == 1) {
+                        winP1++;
+                    }
+                }
+            }
+        }
+
+        return winP1;
+    }
+
+    /**
+     * 
+     * @return the rank calculators in order
+     */
+    public Rank[] getRanks() {
         Rank[] ranks = new Rank[10];
-        ranks[0] = loyalSuit();
+        ranks[0] = loyalFlush();
         ranks[1] = straightFlush();
         ranks[2] = fourOfAKind();
         ranks[3] = fullHouse();
@@ -45,37 +98,48 @@ public class P054 implements Solution {
         ranks[7] = twoPairs();
         ranks[8] = onePair();
         ranks[9] = highCard();
-        
-        List<String> lines = EulerFileUtils.readAsLines("src/main/java/org/hamster/project_euler/p051_075/P054_poker.txt");
-        int winP1 = 0;
-        
-        for (String line : lines) {
-            String[] cardStr = line.split(" ");
-            Card[] cardsP1 = new Card[5];
-            Card[] cardsP2 = new Card[5];
-            for (int i = 0; i < 5; i++) {
-                cardsP1[i] = Card.of(cardStr[i]);
-            }
-            for (int i = 5; i < 10; i++) {
-                cardsP2[i] = Card.of(cardStr[i]);
-            }
-            
-            
-        }
-
-        return null;
-    }
-    
-    private int doFight(Card[] cardsP1, Card[] cardsP2, Rank[] ranks) {
-        Rank rank1 = null;
-        Rank rank2 = null;
-        
-        for (Rank rank : ranks) {
-            int val1 = rank.calcValue(cardsP1);
-            int val2 = rank.calcValue(cardsP2);
-        }
+        return ranks;
     }
 
+    /**
+     * evaluates each rank and returns either -1 for not matching the pattern or the value of the cards under such
+     * pattern. It's easy to understand each checker are in right order to focus on YES check and ignore NO check.
+     * 
+     * @param cards
+     * @param ranks
+     * @return
+     */
+    private int[] doRank(Card[] cards, Rank[] ranks) {
+        int val = -1;
+        int r = -1;
+        do {
+            r++;
+            val = ranks[r].calcValue(cards);
+        } while (val == -1);
+        return new int[] { 9 - r, val };
+    }
+
+    /**
+     * compare the largest card
+     * 
+     * @param cardsP1
+     * @param cardsP2
+     * @return
+     */
+    private int doLargest(Card[] cardsP1, Card[] cardsP2) {
+        for (int i = cardsP1.length - 1; i >= 0; i--) {
+            if (cardsP1[i].getVal() > cardsP2[i].getVal()) {
+                return 1;
+            } else if (cardsP1[i].getVal() < cardsP2[i].getVal()) {
+                return -1;
+            }
+        }
+        return 0;
+    }
+
+    /**
+     * High Card: Highest value card.
+     */
     private Rank highCard() {
         return new Rank(1) {
 
@@ -91,6 +155,9 @@ public class P054 implements Solution {
         };
     }
 
+    /**
+     * One Pair: Two cards of the same value.
+     */
     private Rank onePair() {
         return new Rank(2) {
 
@@ -109,6 +176,9 @@ public class P054 implements Solution {
         };
     }
 
+    /**
+     * Two Pairs: Two different pairs.
+     */
     public Rank twoPairs() {
         return new Rank(3) {
 
@@ -133,6 +203,9 @@ public class P054 implements Solution {
         };
     }
 
+    /**
+     * Three of a Kind: Three cards of the same value.
+     */
     public Rank threeOfAKind() {
         return new Rank(4) {
 
@@ -143,7 +216,7 @@ public class P054 implements Solution {
                 for (Card card : cards) {
                     if ((num & card.getVal()) != 0) {
                         // second time meet the number
-                        if (result != 0) {
+                        if (result == card.getVal()) {
                             // third time meet the number
                             return result;
                         }
@@ -157,6 +230,9 @@ public class P054 implements Solution {
         };
     }
 
+    /**
+     * Straight: All cards are consecutive values.
+     */
     public Rank straight() {
         return new Rank(5) {
 
@@ -183,6 +259,9 @@ public class P054 implements Solution {
         };
     }
 
+    /**
+     * Flush: All cards of the same suit.
+     */
     public Rank flush() {
         return new Rank(6) {
 
@@ -203,6 +282,9 @@ public class P054 implements Solution {
         };
     }
 
+    /**
+     * Full House: Three of a kind and a pair.
+     */
     public Rank fullHouse() {
         return new Rank(7) {
 
@@ -230,6 +312,9 @@ public class P054 implements Solution {
         };
     }
 
+    /**
+     * Four of a Kind: Four cards of the same value.
+     */
     public Rank fourOfAKind() {
         return new Rank(8) {
 
@@ -265,6 +350,9 @@ public class P054 implements Solution {
         };
     }
 
+    /**
+     * Straight Flush: All cards are consecutive values of same suit.
+     */
     public Rank straightFlush() {
         return new Rank(9) {
 
@@ -298,7 +386,10 @@ public class P054 implements Solution {
         };
     }
 
-    public Rank loyalSuit() {
+    /**
+     * Royal Flush: Ten, Jack, Queen, King, Ace, in same suit.
+     */
+    public Rank loyalFlush() {
         return new Rank(10) {
 
             @Override
@@ -332,87 +423,86 @@ public class P054 implements Solution {
         };
     }
 
-}
-
-/**
- * represents a rule
- * 
- * @author <a href="mailto:grossopaforever@gmail.com">Jack Yin</a>
- * @version 1.0
- */
-abstract class Rank {
-    private final int rank;
-
-    public Rank(int rank) {
-        this.rank = rank;
-    }
-
-    abstract public int calcValue(Card[] cards);
-
-    public int getRank() {
-        return this.rank;
-    }
-}
-
-class Card {
-    private final CardValue value;
-    private final CardSuit suit;
-
-    private Card(String s) {
-        value = CardValue.of(s.substring(0, 1));
-        suit = CardSuit.valueOf(s.substring(1));
-    }
-    
-    public static final Card of(String s) {
-        return new Card(s);
-    }
-
     /**
-     * @return the value
+     * represents a rule
+     * 
+     * @author <a href="mailto:grossopaforever@gmail.com">Jack Yin</a>
+     * @version 1.0
      */
-    public int getVal() {
-        return value.getVal();
-    }
+    public static abstract class Rank {
+        private final int rank;
 
-    /**
-     * @return the suit
-     */
-    public CardSuit getSuit() {
-        return suit;
-    }
-
-}
-
-enum CardValue {
-    ONE("1", 1), TWO("2", 2), THREE("3", 4), FOUR("4", 8), FIVE("5", 16), SIX("6", 32), SEVEN("7", 64), EIGHT("8",
-            128), NINE("9", 256), TEN("T", 512), JACK("J", 1024), QUEEN("Q", 2048), KING("K", 4096), ACE("A", 8192);
-
-    private final String key;
-    private final int val;
-
-    CardValue(String key, int val) {
-        this.key = key;
-        this.val = val;
-    }
-
-    public static final CardValue of(String key) {
-        for (CardValue c : CardValue.values()) {
-            if (c.getKey().equals(key)) {
-                return c;
-            }
+        public Rank(int rank) {
+            this.rank = rank;
         }
-        return null;
+
+        abstract public int calcValue(Card[] cards);
+
+        public int getRank() {
+            return this.rank;
+        }
     }
 
-    public String getKey() {
-        return key;
+    public static class Card {
+        private final CardValue value;
+        private final CardSuit suit;
+
+        private Card(String s) {
+            value = CardValue.of(s.substring(0, 1));
+            suit = CardSuit.valueOf(s.substring(1));
+        }
+
+        public static final Card of(String s) {
+            return new Card(s);
+        }
+
+        public int getVal() {
+            return value.getVal();
+        }
+
+        public CardSuit getSuit() {
+            return suit;
+        }
     }
 
-    public int getVal() {
-        return val;
-    }
-}
+    public static enum CardValue {
+        ONE("1", 1), TWO("2", 2), THREE("3", 4), FOUR("4", 8), FIVE("5", 16), SIX("6", 32), SEVEN("7", 64), EIGHT("8",
+                128), NINE("9", 256), TEN("T", 512), JACK("J", 1024), QUEEN("Q", 2048), KING("K", 4096), ACE("A", 8192);
 
-enum CardSuit {
-    S, C, D, H;
+        private final String key;
+        private final int val;
+
+        /**
+         * 
+         * @param key
+         * @param val
+         *            uses 2-based value for used card check
+         */
+        CardValue(String key, int val) {
+            this.key = key;
+            this.val = val;
+        }
+
+        public static final CardValue of(String key) {
+            for (CardValue c : CardValue.values()) {
+                if (c.getKey().equals(key)) {
+                    return c;
+                }
+            }
+            return null;
+        }
+
+        public String getKey() {
+            return key;
+        }
+
+        public int getVal() {
+            return val;
+        }
+    }
+
+    public static enum CardSuit {
+        S, C, D, H;
+    }
+
 }
