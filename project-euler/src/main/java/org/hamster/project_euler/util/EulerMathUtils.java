@@ -11,6 +11,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import static java.math.BigInteger.ZERO;
+
 /**
  * @author <a href="mailto:grossopaforever@gmail.com">Jack Yin</a>
  * @since 1.0
@@ -18,6 +20,7 @@ import java.util.Map;
 public class EulerMathUtils {
 
     public static final BigInteger TWO = BigInteger.valueOf(2);
+    public static final BigInteger TEN = BigInteger.valueOf(10);
 
     private EulerMathUtils() {
         // do nothing
@@ -77,7 +80,7 @@ public class EulerMathUtils {
         return r;
     }
 
-    public static final long reverse(long n) {
+    public static final long reverseNoLeadingZero(long n) {
         String s = String.valueOf(n);
         int l = s.length();
         char[] ca = s.toCharArray();
@@ -89,6 +92,26 @@ public class EulerMathUtils {
             return Long.MIN_VALUE;
         }
         return Long.valueOf(String.valueOf(re));
+    }
+
+    public static final long reverse(long num) {
+        long result = 0;
+        while (num > 0) {
+            long n = num % 10;
+            result = result * 10 + n;
+            num = num / 10;
+        }
+        return result;
+    }
+    
+    public static final BigInteger reverseBig(BigInteger num) {
+        BigInteger result = ZERO;
+        while (num.compareTo(ZERO) == 1) {
+            BigInteger n = num.remainder(TEN);
+            result = result.multiply(TEN).add(n);
+            num = num.divide(TEN);
+        }
+        return result;
     }
 
     public static final boolean onlyWithOddNumbers(long n) {
@@ -123,7 +146,7 @@ public class EulerMathUtils {
         composites[1] = true;
         return composites;
     }
-    
+
     public static List<Integer> primesAsList(boolean[] composites) {
         List<Integer> result = new LinkedList<>();
         for (int i = 2; i < composites.length; i++) {
@@ -133,7 +156,7 @@ public class EulerMathUtils {
         }
         return result;
     }
-    
+
     public static List<Integer> primesAsList(int n) {
         boolean[] composites = primes(n);
         return primesAsList(composites);
@@ -209,7 +232,7 @@ public class EulerMathUtils {
         char[] s = String.valueOf(n).toCharArray();
         return isPalindromic(s);
     }
-    
+
     public static final boolean isPalindromic(char[] s) {
         int l = s.length;
         for (int i = 0; i < l / 2; i++) {
@@ -306,7 +329,7 @@ public class EulerMathUtils {
     public static int digitCount(double n) {
         return (int) (Math.log10(n) + 1);
     }
-    
+
     /**
      * gets all digits in an array
      * 
@@ -315,7 +338,7 @@ public class EulerMathUtils {
      */
     public static int[] digits(double n) {
         int digitCount = digitCount(n);
-        int [] digits = new int[digitCount];
+        int[] digits = new int[digitCount];
         double num = n;
         int index = 0;
         do {
@@ -324,7 +347,7 @@ public class EulerMathUtils {
         } while (num > 0);
         return digits;
     }
-    
+
     /**
      * finds first digit
      * 
@@ -334,9 +357,10 @@ public class EulerMathUtils {
     public static int firstDigit(double n) {
         return (int) (n / Math.pow(10, digitCount(n) - 1));
     }
-    
+
     /**
      * determines a double/float number is actually an Integer
+     * 
      * @param num
      * @return
      */

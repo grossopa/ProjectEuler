@@ -29,7 +29,7 @@ public class P145 implements Solution {
 
         long result = 0;
         for (long i = minBound; i <= max; i++) {
-            long r = EulerMathUtils.reverse(i);
+            long r = EulerMathUtils.reverseNoLeadingZero(i);
             if (r == Long.MIN_VALUE) {
                 continue;
             }
