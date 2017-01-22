@@ -9,12 +9,17 @@ import java.math.BigInteger;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.hamster.project_euler.base.Solution;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 
 /**
+ * 
+ * @param FixMethodOrder to ensure example executed prior than solution
  * @author <a href="mailto:grossopaforever@gmail.com">Jack Yin</a>
  * @version 1.0
  */
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public abstract class AbstractSolutionTest<P extends Solution> {
 
     /**

@@ -32,4 +32,62 @@ public class EulerMathUtilsTest {
         Assert.assertEquals(BigInteger.valueOf(876543210987654321L),
                 EulerMathUtils.reverseBig(BigInteger.valueOf(1234567890123456780L)));
     }
+
+    @Test
+    public void testPerformanceDigitCount() {
+        long currentTime = System.currentTimeMillis();
+        for (int t = 0; t < 5; t++) {
+            for (int i = Integer.MIN_VALUE; i < Integer.MAX_VALUE; i++) {
+                digitCount1(i);
+            }
+        }
+
+        long currentTime2 = System.currentTimeMillis();
+        for (int t = 0; t < 5; t++) {
+            for (int i = Integer.MIN_VALUE; i < Integer.MAX_VALUE; i++) {
+                digitCount2(i);
+            }
+        }
+
+        // t1 wins
+        Assert.assertTrue(currentTime < currentTime2);
+    }
+
+    public static int digitCount1(int n) {
+        return (int) (Math.log10(n) + 1);
+    }
+
+    public static int digitCount2(int n) {
+        n = Math.abs(n);
+        if (n >= 10_000) {
+            if (n >= 1_000_000) {
+                if (n >= 10_000_000) {
+                    return 8;
+                } else {
+                    return 7;
+                }
+            } else {
+                if (n >= 100_000) {
+                    return 6;
+                } else {
+                    return 5;
+                }
+            }
+        } else {
+            if (n >= 100) {
+                if (n >= 1000) {
+                    return 4;
+                } else {
+                    return 3;
+                }
+            } else {
+                if (n >= 10) {
+                    return 2;
+                } else {
+                    return 1;
+                }
+            }
+        }
+    }
+
 }
