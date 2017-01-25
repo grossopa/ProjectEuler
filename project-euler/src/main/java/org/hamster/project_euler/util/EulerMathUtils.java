@@ -103,7 +103,7 @@ public class EulerMathUtils {
         }
         return result;
     }
-    
+
     public static final BigInteger reverseBig(BigInteger num) {
         BigInteger result = ZERO;
         while (num.compareTo(ZERO) == 1) {
@@ -366,6 +366,37 @@ public class EulerMathUtils {
      */
     public static boolean isInteger(double num) {
         return Math.abs(num - (long) num) < 0.0000001D;
+    }
+
+    /**
+     * Euclidean algorithm
+     * 
+     * @param a
+     * @param b
+     * @return
+     */
+    public static double gcd(double a, double b) {
+        if (a == 0) {
+            return b;
+        }
+
+        while (b != 0) {
+            if (a > b) {
+                a = a - b;
+            } else {
+                b = b - a;
+            }
+        }
+
+        return a;
+    }
+
+    public static long gcd(long a, long b) {
+        return (long) gcd((double) a, (double) b);
+    }
+
+    public static int gcd(int a, int b) {
+        return (int) gcd((double) a, (double) b);
     }
 
 }
