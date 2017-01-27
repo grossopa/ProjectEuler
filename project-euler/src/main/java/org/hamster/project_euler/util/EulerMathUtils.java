@@ -11,8 +11,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import static java.math.BigInteger.ZERO;
-
 /**
  * @author <a href="mailto:grossopaforever@gmail.com">Jack Yin</a>
  * @since 1.0
@@ -20,6 +18,8 @@ import static java.math.BigInteger.ZERO;
 public class EulerMathUtils {
 
     public static final BigInteger TWO = BigInteger.valueOf(2);
+    public static final BigInteger ZERO = BigInteger.ZERO;
+    public static final BigInteger ONE = BigInteger.ONE;
     public static final BigInteger TEN = BigInteger.valueOf(10);
 
     private EulerMathUtils() {
@@ -391,10 +391,24 @@ public class EulerMathUtils {
         return a;
     }
 
+    /**
+     * Euclidean algorithm
+     * 
+     * @param a
+     * @param b
+     * @return
+     */
     public static long gcd(long a, long b) {
         return (long) gcd((double) a, (double) b);
     }
 
+    /**
+     * Euclidean algorithm
+     * 
+     * @param a
+     * @param b
+     * @return
+     */
     public static int gcd(int a, int b) {
         return (int) gcd((double) a, (double) b);
     }
