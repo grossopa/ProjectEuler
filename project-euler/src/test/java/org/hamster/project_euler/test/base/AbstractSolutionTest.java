@@ -15,7 +15,8 @@ import org.junit.runners.MethodSorters;
 
 /**
  * 
- * @param FixMethodOrder to ensure example executed prior than solution
+ * @param FixMethodOrder
+ *            to ensure example executed prior than solution
  * @author <a href="mailto:grossopaforever@gmail.com">Jack Yin</a>
  * @version 1.0
  */
@@ -79,13 +80,15 @@ public abstract class AbstractSolutionTest<P extends Solution> {
      * @throws IllegalAccessException
      * @throws InstantiationException
      */
-    public final void invoke(double input, Number expectedResult, boolean showAnswer) throws InstantiationException, IllegalAccessException {
+    public final void invoke(double input, Number expectedResult, boolean showAnswer)
+            throws InstantiationException, IllegalAccessException {
         Number result = problemClass().newInstance().solution(input);
         if (showAnswer) {
             System.out.println(problemClass().getSimpleName() + " answer is : " + toBigDecimal(result).toPlainString());
         }
 
-        MatcherAssert.assertThat(toBigDecimal(result), Matchers.closeTo(toBigDecimal(expectedResult), BigDecimal.valueOf(0.00001D)));
+        MatcherAssert.assertThat(toBigDecimal(result),
+                Matchers.closeTo(toBigDecimal(expectedResult), BigDecimal.valueOf(0.00001D)));
     }
 
     protected static BigDecimal toBigDecimal(Number num) {

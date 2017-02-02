@@ -27,7 +27,6 @@ public class P064 implements Solution {
         for (int num = 0; num <= input; num++) {
             double sqrt = Math.sqrt(num);
             if (EulerMathUtils.isInteger(sqrt)) {
-
                 continue;
             }
 

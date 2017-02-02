@@ -365,7 +365,7 @@ public class EulerMathUtils {
      * @return
      */
     public static boolean isInteger(double num) {
-        return Math.abs(num - (long) num) < 0.0000001D;
+        return !Double.isNaN(num) && !Double.isInfinite(num) && num == Math.rint(num);
     }
 
     /**
@@ -411,6 +411,43 @@ public class EulerMathUtils {
      */
     public static int gcd(int a, int b) {
         return (int) gcd((double) a, (double) b);
+    }
+
+    /**
+     * Copied from http://stackoverflow.com/questions/2685524/check-if-biginteger-is-not-a-perfect-square<br>
+     * 
+     * Computes the integer square root of a number.
+     *
+     * @param n
+     *            The number.
+     *
+     * @return The integer square root, i.e. the largest number whose square doesn't exceed n.
+     */
+    public static BigInteger sqrt(BigInteger n) {
+        if (n.signum() >= 0) {
+            final int bitLength = n.bitLength();
+            BigInteger root = BigInteger.ONE.shiftLeft(bitLength / 2);
+
+            while (!isSqrt(n, root)) {
+                root = root.add(n.divide(root)).divide(TWO);
+            }
+            return root;
+        } else {
+            throw new ArithmeticException("square root of negative number");
+        }
+    }
+
+    /**
+     * Copied from http://stackoverflow.com/questions/2685524/check-if-biginteger-is-not-a-perfect-square<br>
+     * 
+     * @param n
+     * @param root
+     * @return
+     */
+    private static boolean isSqrt(BigInteger n, BigInteger root) {
+        final BigInteger lowerBound = root.pow(2);
+        final BigInteger upperBound = root.add(BigInteger.ONE).pow(2);
+        return lowerBound.compareTo(n) <= 0 && n.compareTo(upperBound) < 0;
     }
 
 }

@@ -3,9 +3,12 @@
  */
 package org.hamster.project_euler.test.util;
 
+import java.math.BigInteger;
+import java.util.List;
 import java.util.function.Function;
 
 import org.hamster.project_euler.util.EulerCallbackUtils;
+import org.hamster.project_euler.util.EulerCallbackUtils.ContinuedFractionsCallback;
 import org.hamster.project_euler.util.EulerMathUtils;
 import org.junit.Assert;
 import org.junit.Test;
@@ -37,5 +40,40 @@ public class EulerCallbackUtilsTest {
             Assert.assertTrue(prev < result[i]);
             prev = result[i];
         }
+    }
+
+    @Test
+    public void testContinuedFractions() {
+        EulerCallbackUtils.continuedFractions(2, 5, new ContinuedFractionsCallback() {
+
+            @Override
+            public boolean apply(List<BigInteger[]> sequence, BigInteger bsqrt, BigInteger left, BigInteger numerator,
+                    BigInteger denominator) {
+                Assert.assertEquals(BigInteger.valueOf(2), left);
+                Assert.assertEquals(BigInteger.valueOf(1), numerator);
+                Assert.assertEquals(BigInteger.valueOf(1), denominator);
+                return true;
+            }
+
+        });
+
+        EulerCallbackUtils.continuedFractions(3, 5, new ContinuedFractionsCallback() {
+
+            @Override
+            public boolean apply(List<BigInteger[]> sequence, BigInteger bsqrt, BigInteger left, BigInteger numerator,
+                    BigInteger denominator) {
+                if (sequence.size() % 2 == 1) {
+                    Assert.assertEquals(BigInteger.valueOf(1), left);
+                    Assert.assertEquals(BigInteger.valueOf(1), numerator);
+                    Assert.assertEquals(BigInteger.valueOf(2), denominator);
+                } else {
+                    Assert.assertEquals(BigInteger.valueOf(2), left);
+                    Assert.assertEquals(BigInteger.valueOf(1), numerator);
+                    Assert.assertEquals(BigInteger.valueOf(1), denominator);
+                }
+                return true;
+            }
+
+        });
     }
 }
