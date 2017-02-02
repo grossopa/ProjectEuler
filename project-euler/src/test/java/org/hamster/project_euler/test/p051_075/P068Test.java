@@ -20,8 +20,7 @@ public class P068Test extends AbstractSolutionTest<P068> {
      */
     @Override
     protected TestResult example() {
-        // return TestResult.create(3, 432621513L);
-        return null;
+        return TestResult.create(3, 432621513L);
     }
 
     /*
@@ -31,8 +30,7 @@ public class P068Test extends AbstractSolutionTest<P068> {
      */
     @Override
     protected TestResult solution() {
-        // return TestResult.create(5, 0);
-        return null;
+        return TestResult.create(5, 6531031914842725L);
     }
 
     /*

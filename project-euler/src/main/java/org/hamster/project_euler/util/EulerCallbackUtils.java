@@ -8,6 +8,7 @@ import static java.math.BigInteger.ZERO;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.function.Function;
 
@@ -72,7 +73,11 @@ public final class EulerCallbackUtils {
     }
 
     public static <T> void permutation(Function<T[], Boolean> function, T[] items) {
-        new PermutationIter<T>(function, items).permutations(0, 0, items);
+        T[] picked = Arrays.copyOf(items, items.length);
+        for (int i = 0; i < picked.length; i++) {
+            picked[i] = null;
+        }
+        new PermutationIter<T>(function, items).permutations(0, 0, picked);
     }
 
     private static final class PermutationIter<T> {
