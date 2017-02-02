@@ -21,7 +21,7 @@ public class EulerCallbackUtilsTest {
 
     @Test
     public void tesetPermutation() {
-        int[] numbers = new int[] { 2, 4, 6 };
+        Integer[] numbers = new Integer[] { 2, 4, 6 };
         final long[] result = new long[(int) EulerMathUtils.permutationCount(3, 3)];
         int[] index = new int[] { 0 };
         EulerCallbackUtils.permutationDigits(new Function<Long, Boolean>() {
@@ -49,7 +49,12 @@ public class EulerCallbackUtilsTest {
             @Override
             public boolean apply(List<BigInteger[]> sequence, BigInteger bsqrt, BigInteger left, BigInteger numerator,
                     BigInteger denominator) {
-                Assert.assertEquals(BigInteger.valueOf(2), left);
+                if (sequence.size() == 1) {
+                    Assert.assertEquals(BigInteger.valueOf(1), left);
+                } else {
+                    Assert.assertEquals(BigInteger.valueOf(2), left);
+                }
+
                 Assert.assertEquals(BigInteger.valueOf(1), numerator);
                 Assert.assertEquals(BigInteger.valueOf(1), denominator);
                 return true;
@@ -62,7 +67,10 @@ public class EulerCallbackUtilsTest {
             @Override
             public boolean apply(List<BigInteger[]> sequence, BigInteger bsqrt, BigInteger left, BigInteger numerator,
                     BigInteger denominator) {
-                if (sequence.size() % 2 == 1) {
+
+                if (sequence.size() == 1) {
+                    Assert.assertEquals(BigInteger.valueOf(1), left);
+                } else if (sequence.size() % 2 == 0) {
                     Assert.assertEquals(BigInteger.valueOf(1), left);
                     Assert.assertEquals(BigInteger.valueOf(1), numerator);
                     Assert.assertEquals(BigInteger.valueOf(2), denominator);

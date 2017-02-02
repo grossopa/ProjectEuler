@@ -30,7 +30,7 @@ public class P059Test extends AbstractSolutionTest<P059> {
      */
     @Override
     protected TestResult solution() {
-        return TestResult.create(0, 0);
+        return TestResult.create(0, 107359);
     }
 
     /*

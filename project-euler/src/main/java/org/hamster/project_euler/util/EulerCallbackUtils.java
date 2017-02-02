@@ -29,7 +29,7 @@ public final class EulerCallbackUtils {
      * @param n
      */
     public static void permutationDigits(Function<Long, Boolean> function, int n) {
-        int[] numbers = new int[n];
+        Integer[] numbers = new Integer[n];
         for (int i = 0; i < n; i++) {
             numbers[i] = i + 1;
         }
@@ -39,61 +39,79 @@ public final class EulerCallbackUtils {
     /**
      * 
      * @param function
+     * @param numbers
+     */
+    public static void permutationDigits(Function<Long, Boolean> function, int[] numbers) {
+        Integer[] nums = new Integer[numbers.length];
+        for (int i = 0; i < numbers.length; i++) {
+            nums[i] = numbers[i];
+        }
+        permutationDigits(function, nums);
+    }
+
+    /**
+     * 
+     * @param function
      *            takes each permutation member of the set as parameter and returns boolean to indicate should continue
      *            or terminate.
      * @param n
      */
-    public static void permutationDigits(Function<Long, Boolean> function, int[] numbers) {
-        int l = numbers.length;
-        int[] numberIndex = new int[l];
-        for (int i = 0; i < l; i++) {
-            numberIndex[i] = (int) Math.pow(2, i);
-        }
+    public static void permutationDigits(Function<Long, Boolean> function, Integer[] numbers) {
+        new PermutationIter<Integer>(new Function<Integer[], Boolean>() {
 
-        new PermutationIterator(numberIndex, numbers, function).permutationDigits(0, 0, new int[l]);
+            @Override
+            public Boolean apply(Integer[] picked) {
+                Long num = 0L;
+                for (int p = 0; p < picked.length; p++) {
+                    num += Double.valueOf(picked[p] * Math.pow(10, picked.length - p - 1)).longValue();
+                }
+                return function.apply(num);
+            }
+
+        }, numbers).permutations(0, 0, new Integer[numbers.length]);
     }
 
-    /**
-     * PermutationDigits implementation
-     * 
-     * @author <a href="mailto:grossopaforever@gmail.com">Jack Yin</a>
-     * @version 1.0
-     */
-    private static final class PermutationIterator {
-        private final int[] numberIndex;
-        private final int[] numbers;
-        private final Function<Long, Boolean> function;
+    public static <T> void permutation(Function<T[], Boolean> function, T[] items) {
+        new PermutationIter<T>(function, items).permutations(0, 0, items);
+    }
+
+    private static final class PermutationIter<T> {
+        private final T[] items;
+        private final Function<T[], Boolean> function;
+
+        private final long[] itemIndex;
         private boolean shouldContinue = true;
 
-        PermutationIterator(int[] numberIndex, int[] numbers, Function<Long, Boolean> function) {
-            this.numberIndex = numberIndex;
-            this.numbers = numbers;
+        PermutationIter(Function<T[], Boolean> function, T[] items) {
+            this.items = items;
             this.function = function;
+
+            int l = items.length;
+            itemIndex = new long[l];
+            for (int i = 0; i < l; i++) {
+                itemIndex[i] = (long) Math.pow(2, i);
+            }
         }
 
-        void permutationDigits(int usedNumber, int index, int[] picked) {
+        void permutations(long usedItem, int index, T[] picked) {
             if (!shouldContinue) {
                 return;
             }
-            int l = numberIndex.length;
+            int l = itemIndex.length;
             for (int i = 0; i < l; i++) {
-                int usedIndexValue = (int) Math.pow(2, i);
-                if ((usedIndexValue & usedNumber) != 0) {
+                long usedIndexValue = itemIndex[i];
+                if ((usedIndexValue & usedItem) != 0) {
                     continue;
                 }
-                int nextUsed = usedNumber | usedIndexValue;
-                picked[index] = numbers[i];
+                long nextUsed = usedItem | usedIndexValue;
+                picked[index] = items[i];
                 if (index == l - 1) {
-                    long num = 0;
-                    for (int p = 0; p < picked.length; p++) {
-                        num += picked[p] * Math.pow(10, l - p - 1);
-                    }
-                    shouldContinue = function.apply(num);
+                    shouldContinue = function.apply(picked);
                     if (!shouldContinue) {
                         return;
                     }
                 } else {
-                    permutationDigits(nextUsed, index + 1, picked);
+                    permutations(nextUsed, index + 1, picked);
                 }
             }
         }
