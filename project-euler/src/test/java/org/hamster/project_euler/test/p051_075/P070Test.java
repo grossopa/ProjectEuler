@@ -31,7 +31,6 @@ public class P070Test extends AbstractSolutionTest<P070> {
     @Override
     protected TestResult solution() {
         return TestResult.create(Math.pow(10, 7), 8319823);
-        // return null;
     }
 
     /*
