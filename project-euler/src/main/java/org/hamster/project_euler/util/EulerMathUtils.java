@@ -7,9 +7,11 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * @author <a href="mailto:grossopaforever@gmail.com">Jack Yin</a>
@@ -287,6 +289,48 @@ public class EulerMathUtils {
     }
 
     /**
+     * gets prime factors
+     * 
+     * @param numbers
+     * @return
+     */
+    public static List<Long> primeFactors(long num) {
+        long n = num;
+        List<Long> factors = new ArrayList<>();
+        for (long i = 2; i <= n / i; i++) {
+            while (n % i == 0) {
+                factors.add(i);
+                n /= i;
+            }
+        }
+        if (n > 1) {
+            factors.add(n);
+        }
+        return factors;
+    }
+
+    /**
+     * gets prime factors of a number and remove duplication
+     * 
+     * @param num
+     * @return
+     */
+    public static Set<Long> primeFactorsSet(long num) {
+        long n = num;
+        Set<Long> factors = new LinkedHashSet<>();
+        for (long i = 2; i <= n / i; i++) {
+            while (n % i == 0) {
+                factors.add(i);
+                n /= i;
+            }
+        }
+        if (n > 1) {
+            factors.add(n);
+        }
+        return factors;
+    }
+
+    /**
      * e.g. 12 as 1 + 2 + 3 + 4 + 6 = 16
      * 
      * @param n
@@ -448,6 +492,22 @@ public class EulerMathUtils {
         final BigInteger lowerBound = root.pow(2);
         final BigInteger upperBound = root.add(BigInteger.ONE).pow(2);
         return lowerBound.compareTo(n) <= 0 && n.compareTo(upperBound) < 0;
+    }
+
+    /**
+     * Euler's totient function
+     * 
+     * @see <a href="https://en.wikipedia.org/wiki/Euler%27s_totient_function">https://en.wikipedia.org/wiki/Euler%27s_totient_function</a>
+     * @param num
+     * @return
+     */
+    public static long eulersTotientFunction(long num) {
+        Set<Long> primeFactors = primeFactorsSet(num);
+        long n = num;
+        for (Long pf : primeFactors) {
+            n = n * (pf - 1) / pf;
+        }
+        return n;
     }
 
 }

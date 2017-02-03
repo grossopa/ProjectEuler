@@ -26,11 +26,9 @@ public class EulerMathUtilsTest {
     @Test
     public void testReverseBig() {
         Assert.assertEquals(BigInteger.valueOf(54321L), EulerMathUtils.reverseBig(BigInteger.valueOf(12345L)));
-        Assert.assertEquals(BigInteger.valueOf(1111154321L),
-                EulerMathUtils.reverseBig(BigInteger.valueOf(1234511111L)));
+        Assert.assertEquals(BigInteger.valueOf(1111154321L), EulerMathUtils.reverseBig(BigInteger.valueOf(1234511111L)));
         Assert.assertEquals(BigInteger.valueOf(54321L), EulerMathUtils.reverseBig(BigInteger.valueOf(12345000L)));
-        Assert.assertEquals(BigInteger.valueOf(876543210987654321L),
-                EulerMathUtils.reverseBig(BigInteger.valueOf(1234567890123456780L)));
+        Assert.assertEquals(BigInteger.valueOf(876543210987654321L), EulerMathUtils.reverseBig(BigInteger.valueOf(1234567890123456780L)));
     }
 
     @Test
@@ -88,6 +86,21 @@ public class EulerMathUtilsTest {
                 }
             }
         }
+    }
+
+    @Test
+    public void testEulersTotientFunction() {
+        Assert.assertEquals(12, EulerMathUtils.eulersTotientFunction(36));
+        Assert.assertEquals(1, EulerMathUtils.eulersTotientFunction(2));
+        Assert.assertEquals(2, EulerMathUtils.eulersTotientFunction(3));
+        Assert.assertEquals(2, EulerMathUtils.eulersTotientFunction(4));
+        Assert.assertEquals(4, EulerMathUtils.eulersTotientFunction(5));
+        Assert.assertEquals(2, EulerMathUtils.eulersTotientFunction(6));
+        Assert.assertEquals(6, EulerMathUtils.eulersTotientFunction(7));
+        Assert.assertEquals(4, EulerMathUtils.eulersTotientFunction(8));
+        Assert.assertEquals(6, EulerMathUtils.eulersTotientFunction(9));
+        Assert.assertEquals(4, EulerMathUtils.eulersTotientFunction(10));
+        
     }
 
 }
