@@ -61,6 +61,41 @@ public class EulerMathUtils {
     }
 
     /**
+     * 0-9 flags
+     */
+    private static final long[] NUMBER_FLAGS = { 0x1, 0x10, 0x100, 0x1000, 0x10000, 0x100000, 0x1000000, 0x10000000L,
+            0x100000000L, 0x1000000000L };
+
+    /**
+     * Determines whether these 2 numbers are permutation of each other
+     * 
+     * @param m
+     * @param n
+     * @return
+     */
+    public static boolean isPermutation(long m, long n) {
+        if (m == n) {
+            return true;
+        } else if (digitCount(m) != digitCount(n)) {
+            return false;
+        }
+
+        // uses HEX to record used status of each digit
+        long um = 0x0;
+        long un = 0x0;
+
+        while (m > 0) {
+            um += NUMBER_FLAGS[(int) (m % 10)];
+            un += NUMBER_FLAGS[(int) (n % 10)];
+            m /= 10;
+            n /= 10;
+        }
+
+        return um == un;
+
+    }
+
+    /**
      * return n!
      * 
      * @param n
@@ -315,7 +350,7 @@ public class EulerMathUtils {
      * @param num
      * @return
      */
-    public static Set<Long> primeFactorsSet(long num) {
+    public static Set<Long> distinctPrimeFactors(long num) {
         long n = num;
         Set<Long> factors = new LinkedHashSet<>();
         for (long i = 2; i <= n / i; i++) {
@@ -497,12 +532,13 @@ public class EulerMathUtils {
     /**
      * Euler's totient function
      * 
-     * @see <a href="https://en.wikipedia.org/wiki/Euler%27s_totient_function">https://en.wikipedia.org/wiki/Euler%27s_totient_function</a>
+     * @see <a href="https://en.wikipedia.org/wiki/Euler%27s_totient_function">https://en.wikipedia.org/wiki/Euler%
+     *      27s_totient_function</a>
      * @param num
      * @return
      */
     public static long eulersTotientFunction(long num) {
-        Set<Long> primeFactors = primeFactorsSet(num);
+        Set<Long> primeFactors = distinctPrimeFactors(num);
         long n = num;
         for (Long pf : primeFactors) {
             n = n * (pf - 1) / pf;

@@ -26,9 +26,11 @@ public class EulerMathUtilsTest {
     @Test
     public void testReverseBig() {
         Assert.assertEquals(BigInteger.valueOf(54321L), EulerMathUtils.reverseBig(BigInteger.valueOf(12345L)));
-        Assert.assertEquals(BigInteger.valueOf(1111154321L), EulerMathUtils.reverseBig(BigInteger.valueOf(1234511111L)));
+        Assert.assertEquals(BigInteger.valueOf(1111154321L),
+                EulerMathUtils.reverseBig(BigInteger.valueOf(1234511111L)));
         Assert.assertEquals(BigInteger.valueOf(54321L), EulerMathUtils.reverseBig(BigInteger.valueOf(12345000L)));
-        Assert.assertEquals(BigInteger.valueOf(876543210987654321L), EulerMathUtils.reverseBig(BigInteger.valueOf(1234567890123456780L)));
+        Assert.assertEquals(BigInteger.valueOf(876543210987654321L),
+                EulerMathUtils.reverseBig(BigInteger.valueOf(1234567890123456780L)));
     }
 
     @Test
@@ -100,7 +102,16 @@ public class EulerMathUtilsTest {
         Assert.assertEquals(4, EulerMathUtils.eulersTotientFunction(8));
         Assert.assertEquals(6, EulerMathUtils.eulersTotientFunction(9));
         Assert.assertEquals(4, EulerMathUtils.eulersTotientFunction(10));
-        
+    }
+    
+    @Test
+    public void testIsPermutation() {
+        Assert.assertTrue(EulerMathUtils.isPermutation(12345, 54321));
+        Assert.assertTrue(EulerMathUtils.isPermutation(12345, 23451));
+        Assert.assertFalse(EulerMathUtils.isPermutation(123456, 23451));
+        Assert.assertTrue(EulerMathUtils.isPermutation(113355, 153531));
+        Assert.assertTrue(EulerMathUtils.isPermutation(1133557777799L, 1757379957371L));
+        Assert.assertFalse(EulerMathUtils.isPermutation(1133557777799L, 1757379957372L));
     }
 
 }
