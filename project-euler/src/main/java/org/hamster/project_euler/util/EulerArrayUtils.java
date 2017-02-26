@@ -14,7 +14,7 @@ import java.util.List;
  * @since 1.0
  */
 public class EulerArrayUtils {
-    
+
     /**
      * get n! permutation of the elements of array a (not in order)
      * 
@@ -26,7 +26,7 @@ public class EulerArrayUtils {
         permutation(Arrays.copyOf(s, l), l, r);
         return r;
     }
-    
+
     private static void permutation(long[] a, int n, List<long[]> r) {
         if (n == 1) {
             r.add(Arrays.copyOf(a, a.length));
@@ -76,7 +76,7 @@ public class EulerArrayUtils {
 
         return combination;
     }
-    
+
     public static final long sum(long[] set) {
         long result = 0;
         for (long l : set) {
@@ -84,7 +84,7 @@ public class EulerArrayUtils {
         }
         return result;
     }
-    
+
     public static final long sum(Iterable<Long> set) {
         long result = 0;
         for (long l : set) {
@@ -92,7 +92,7 @@ public class EulerArrayUtils {
         }
         return result;
     }
-    
+
     public static final boolean uniqueElements(long[] sortedlist) {
         for (int i = 1; i < sortedlist.length; i++) {
             if (sortedlist[i] == sortedlist[i - 1]) {
@@ -102,29 +102,13 @@ public class EulerArrayUtils {
         return true;
     }
 
-
-    public static final void main(String[] args) {
-
-        List<long[]> result = permutation(new long[] { 1l, 2l, 3l, 4l });
-
-        for (long[] r : result) {
-            System.out.println(Arrays.toString(r));
+    public static final int indexOf(long[] list, long num) {
+        for (int i = 0; i < list.length; i++) {
+            if (list[i] == num) {
+                return i;
+            }
         }
-        
-        List<Long> l = new ArrayList<>();
-        l.add(1L);
-        l.add(2L);
-        l.add(3L);
-        l.add(4L);
-        l.add(5L);
-        l.add(6L);
-
-        List<List<Long>> result2 = combination(l, 3);
-
-        for (List<Long> r : result2) {
-            System.out.println(Arrays.toString(r.toArray()));
-        }
-
+        return -1;
     }
 
 }
