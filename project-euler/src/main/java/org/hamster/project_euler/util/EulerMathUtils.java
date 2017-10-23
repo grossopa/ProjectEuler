@@ -545,5 +545,16 @@ public class EulerMathUtils {
         }
         return n;
     }
+    
+    /**
+     * Determines whether a and b are coprime.
+     * 
+     * @param a
+     * @param b
+     * @return
+     */
+    public static boolean coprime(long a, long b) {
+        return gcd(a, b) == 1;
+    }
 
 }
